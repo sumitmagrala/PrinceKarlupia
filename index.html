@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Dr. Prince Karlupia! 🩺🎂</title>
+    <meta name="description" content="A special doctor-themed birthday surprise web page for Dr. Prince Karlupia!">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Reenie+Beanie&display=swap" rel="stylesheet">
+    <!-- FontAwesome for cute icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Canvas for Floating Heartbeat Particles & Confetti -->
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Floating Audio Control & Theme Toggle -->
+    <div class="top-controls">
+        <button id="music-toggle" class="control-btn" title="Toggle Birthday Song">
+            <i class="fa-solid fa-music"></i>
+            <span class="btn-tooltip">Play Song 🎵</span>
+        </button>
+        <button id="theme-toggle" class="control-btn" title="Toggle Light/Dark Theme">
+            <i class="fa-solid fa-moon"></i>
+            <span class="btn-tooltip">Theme 🌙</span>
+        </button>
+    </div>
+
+    <!-- ==========================================
+         STAGE 1: EMERGENCY HEARTBEAT INTRO SCREEN
+         ========================================== -->
+    <section id="stage-intro" class="stage active">
+        <div class="intro-card glass-panel">
+            <div class="medical-badge">
+                <i class="fa-solid fa-hospital-user pulse-icon"></i>
+                <span>OFFICIAL BIRTHDAY DIAGNOSIS</span>
+            </div>
+
+            <div class="ecg-container">
+                <canvas id="ecg-canvas"></canvas>
+                <div class="heartbeat-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">PATIENT</span>
+                        <span class="stat-value highlight">Dr. Prince Karlupia 👑</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">HEART RATE</span>
+                        <span class="stat-value" id="bpm-counter">120 BPM <i class="fa-solid fa-heartbeat text-danger"></i></span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">DIAGNOSIS</span>
+                        <span class="stat-value text-success">100% Pure Happiness</span>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="main-title">Happy Birthday, <br><span class="gradient-text">Dr. Prince!</span> 🩺✨</h1>
+            <p class="intro-subtitle">A special medical prescription of love, joy, and endless smiles crafted just for you!</p>
+
+            <div class="intro-actions">
+                <button id="btn-start-surprise" class="btn-primary glow-effect">
+                    <i class="fa-solid fa-notes-medical"></i> Unlock Birthday Surprise
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MAIN SURPRISE CONTAINER (Appears after unlock)
+         ========================================== -->
+    <main id="main-content" class="hidden">
+
+        <!-- HERO HEADER -->
+        <header class="hero-section">
+            <div class="doctor-badge-wrapper">
+                <div class="doctor-avatar-circle">
+                    <img src="doctor_celebration.jpg" alt="Dr. Prince Karlupia" id="hero-doctor-img" onerror="this.src='doctor_birthday.jpg'">
+                    <div class="stethoscope-ring"></div>
+                </div>
+                <div class="hero-badge">
+                    <i class="fa-solid fa-user-doctor"></i> Dr. Prince Karlupia (M.D.)
+                </div>
+            </div>
+            
+            <h1 class="hero-title">Happy Birthday <span class="gradient-text">Dr. Prince!</span> 🎉</h1>
+            <p class="hero-sub">The world is healthier, happier, and brighter because of your kind heart!</p>
+
+            <div class="vital-signs-bar glass-panel">
+                <div class="vital-item">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <div>
+                        <strong>Love Level</strong>
+                        <span>Infinite %</span>
+                    </div>
+                </div>
+                <div class="vital-item">
+                    <i class="fa-solid fa-kit-medical"></i>
+                    <div>
+                        <strong>Prescription</strong>
+                        <span>Cake & Rest</span>
+                    </div>
+                </div>
+                <div class="vital-item">
+                    <i class="fa-solid fa-stethoscope"></i>
+                    <div>
+                        <strong>Status</strong>
+                        <span>Birthday King 👑</span>
+                    </div>
+                </div>
+                <div class="vital-item">
+                    <i class="fa-solid fa-face-smile-beam"></i>
+                    <div>
+                        <strong>Smiles Cured</strong>
+                        <span>10,000+</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SECTION 1: DOCTOR'S BIRTHDAY PRESCRIPTION (Rx Card) -->
+        <section class="section-container">
+            <div class="section-header">
+                <span class="chip"><i class="fa-solid fa-prescription"></i> OFFICIAL Rx NOTE</span>
+                <h2>Doctor's Birthday Prescription</h2>
+                <p>Authorized by the Department of Pure Birthday Happiness</p>
+            </div>
+
+            <div class="rx-card-wrapper">
+                <div class="rx-card glass-panel">
+                    <div class="rx-header">
+                        <div class="rx-symbol">Rx</div>
+                        <div class="rx-clinic-info">
+                            <h3>GLOBAL HEALING CLINIC</h3>
+                            <p>Specialization: Curing Bad Days & Spreading Smiles</p>
+                            <small>Date: Today & Forever | Refill: Unlimited</small>
+                        </div>
+                        <div class="rx-stamp">
+                            <span>PASSED WITH LOVE</span>
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="rx-body">
+                        <div class="rx-patient-info">
+                            <p><strong>Patient Name:</strong> Dr. Prince Karlupia</p>
+                            <p><strong>Age:</strong> Forever Handsome & Young 🌟</p>
+                        </div>
+
+                        <div class="rx-items">
+                            <div class="rx-item">
+                                <div class="rx-icon"><i class="fa-solid fa-syringe text-teal"></i></div>
+                                <div class="rx-details">
+                                    <h4>500mg Vitamin Joy & Cheer</h4>
+                                    <p>Take immediately with warm hugs and endless laughs.</p>
+                                </div>
+                            </div>
+                            <div class="rx-item">
+                                <div class="rx-icon"><i class="fa-solid fa-pills text-pink"></i></div>
+                                <div class="rx-details">
+                                    <h4>2 Capsules of No Stress</h4>
+                                    <p>Strictly forbidden to worry about hospital rounds today!</p>
+                                </div>
+                            </div>
+                            <div class="rx-item">
+                                <div class="rx-icon"><i class="fa-solid fa-cake-candles text-amber"></i></div>
+                                <div class="rx-details">
+                                    <h4>1 Large Slice of Birthday Cake</h4>
+                                    <p>Repeat dosage until stomach is 100% satisfied.</p>
+                                </div>
+                            </div>
+                            <div class="rx-item">
+                                <div class="rx-icon"><i class="fa-solid fa-heart text-danger"></i></div>
+                                <div class="rx-details">
+                                    <h4>Unlimited Blessings & Success</h4>
+                                    <p>May all your patients heal fast and your coffee always be hot!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rx-footer">
+                            <div class="rx-signature">
+                                <span class="sig-line">Dr. Best Friends & Loved Ones</span>
+                                <small>Chief Medical Birthday Officers</small>
+                            </div>
+                            <div class="rx-qr">
+                                <i class="fa-solid fa-qrcode"></i>
+                                <small>Scan for Hugs</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: INTERACTIVE CAKE & CANDLE BLOWING -->
+        <section class="section-container">
+            <div class="section-header">
+                <span class="chip"><i class="fa-solid fa-cake-candles"></i> TIME TO WISH</span>
+                <h2>Make a Birthday Wish, Dr. Prince!</h2>
+                <p>Click on the candles or press the button to blow them out!</p>
+            </div>
+
+            <div class="cake-stage-wrapper glass-panel">
+                <div class="cake-container">
+                    <!-- CSS 3D Cake -->
+                    <div class="cake">
+                        <div class="plate"></div>
+                        <div class="layer layer-bottom"></div>
+                        <div class="layer layer-middle"></div>
+                        <div class="layer layer-top"></div>
+                        <div class="icing"></div>
+                        <div class="drips">
+                            <div class="drip drip1"></div>
+                            <div class="drip drip2"></div>
+                            <div class="drip drip3"></div>
+                            <div class="drip drip4"></div>
+                        </div>
+                        
+                        <!-- Candles -->
+                        <div class="candles-group">
+                            <div class="candle candle-1">
+                                <div class="flame"></div>
+                                <div class="smoke"></div>
+                            </div>
+                            <div class="candle candle-2">
+                                <div class="flame"></div>
+                                <div class="smoke"></div>
+                            </div>
+                            <div class="candle candle-3">
+                                <div class="flame"></div>
+                                <div class="smoke"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cake-controls">
+                    <button id="btn-blow-candle" class="btn-primary">
+                        <i class="fa-solid fa-wind"></i> Blow Candles & Trigger Confetti 🎉
+                    </button>
+                    <div id="wish-message" class="wish-banner hidden">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Your Wish has been sent to the Universe! May your year be filled with health, happiness, and miracles! ✨</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: CUTE MEMORY POLAROID GALLERY -->
+        <section class="section-container">
+            <div class="section-header">
+                <span class="chip"><i class="fa-solid fa-camera-retro"></i> MEMORY LANE</span>
+                <h2>Dr. Prince's Memory Gallery</h2>
+                <p>Capturing the finest, happiest, and most handsome moments!</p>
+            </div>
+
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Images will be dynamically appended/checked (1.jpg, 2.jpg, 3.jpg, 4.jpg, demo1.jpg, demo2.jpg, etc.) -->
+            </div>
+        </section>
+
+        <!-- SECTION 4: INTERACTIVE "DAILY HAPPINESS PILLS" -->
+        <section class="section-container">
+            <div class="section-header">
+                <span class="chip"><i class="fa-solid fa-capsules"></i> DAILY DOSAGE</span>
+                <h2>Pop a Happiness Pill 💊</h2>
+                <p>Click on any pill capsule to unlock a special secret message for Dr. Prince!</p>
+            </div>
+
+            <div class="pills-grid">
+                <div class="pill-card" data-pill="1">
+                    <div class="pill-capsule pill-color-1">
+                        <div class="pill-half top"><i class="fa-solid fa-heart"></i></div>
+                        <div class="pill-half bottom">#1</div>
+                    </div>
+                    <span>Dose #1</span>
+                </div>
+                <div class="pill-card" data-pill="2">
+                    <div class="pill-capsule pill-color-2">
+                        <div class="pill-half top"><i class="fa-solid fa-star"></i></div>
+                        <div class="pill-half bottom">#2</div>
+                    </div>
+                    <span>Dose #2</span>
+                </div>
+                <div class="pill-card" data-pill="3">
+                    <div class="pill-capsule pill-color-3">
+                        <div class="pill-half top"><i class="fa-solid fa-stethoscope"></i></div>
+                        <div class="pill-half bottom">#3</div>
+                    </div>
+                    <span>Dose #3</span>
+                </div>
+                <div class="pill-card" data-pill="4">
+                    <div class="pill-capsule pill-color-4">
+                        <div class="pill-half top"><i class="fa-solid fa-crown"></i></div>
+                        <div class="pill-half bottom">#4</div>
+                    </div>
+                    <span>Dose #4</span>
+                </div>
+                <div class="pill-card" data-pill="5">
+                    <div class="pill-capsule pill-color-5">
+                        <div class="pill-half top"><i class="fa-solid fa-face-smile"></i></div>
+                        <div class="pill-half bottom">#5</div>
+                    </div>
+                    <span>Dose #5</span>
+                </div>
+                <div class="pill-card" data-pill="6">
+                    <div class="pill-capsule pill-color-6">
+                        <div class="pill-half top"><i class="fa-solid fa-gift"></i></div>
+                        <div class="pill-half bottom">#6</div>
+                    </div>
+                    <span>Dose #6</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: WISHLIST & GREETING BOARD -->
+        <section class="section-container">
+            <div class="section-header">
+                <span class="chip"><i class="fa-solid fa-clipboard-check"></i> WISH BOARD</span>
+                <h2>Leave a Wish for Dr. Prince Karlupia</h2>
+                <p>Pin your birthday message to the doctor's wall!</p>
+            </div>
+
+            <div class="wish-board-wrapper glass-panel">
+                <form id="wish-form" class="wish-form">
+                    <div class="form-group">
+                        <input type="text" id="wish-name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="wish-icon">
+                            <option value="🩺">🩺 Doctor Stethoscope</option>
+                            <option value="❤️">❤️ Heart of Gold</option>
+                            <option value="🎂">🎂 Birthday Cake</option>
+                            <option value="👑">👑 Prince Crown</option>
+                            <option value="💊">💊 Happiness Pill</option>
+                            <option value="✨">✨ Magic Sparkle</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <textarea id="wish-text" rows="3" placeholder="Write your heartfelt birthday wish for Dr. Prince..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-thumbtack"></i> Pin Wish to Board
+                    </button>
+                </form>
+
+                <div class="pinned-wishes-grid" id="pinned-wishes">
+                    <!-- Default sample wishes pinned -->
+                    <div class="wish-note note-color-1">
+                        <div class="pin"></div>
+                        <div class="note-header">
+                            <span class="note-icon">🩺</span>
+                            <strong>Medical Team</strong>
+                        </div>
+                        <p>"Happy Birthday Dr. Prince! Thank you for saving lives and spreading kindness every single day!"</p>
+                        <small>Pinned with love ❤️</small>
+                    </div>
+
+                    <div class="wish-note note-color-2">
+                        <div class="pin"></div>
+                        <div class="note-header">
+                            <span class="note-icon">👑</span>
+                            <strong>Best Buddies</strong>
+                        </div>
+                        <p>"To the coolest doctor on the planet! May your day be as awesome and bright as you are!"</p>
+                        <small>Happy Birthday Prince! 🎉</small>
+                    </div>
+
+                    <div class="wish-note note-color-3">
+                        <div class="pin"></div>
+                        <div class="note-header">
+                            <span class="note-icon">🎂</span>
+                            <strong>Family & Friends</strong>
+                        </div>
+                        <p>"Wishing you a year filled with great health, successful operations, and endless reasons to smile!"</p>
+                        <small>Cheers to you! 🥂</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-heart">
+                    <i class="fa-solid fa-heartbeat pulse-icon text-danger"></i>
+                </div>
+                <p>Designed with ❤️ and 🩺 for <strong>Dr. Prince Karlupia</strong></p>
+                <small>© Happy Birthday Prince | Stay Healthy & Keep Smiling!</small>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- PILL MODAL POPUP -->
+    <div id="pill-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-card glass-panel">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <div class="modal-icon" id="modal-pill-icon"><i class="fa-solid fa-capsules"></i></div>
+            <h3 id="modal-pill-title">Dose of Pure Joy 💊</h3>
+            <div class="modal-body" id="modal-pill-content">
+                Message content goes here...
+            </div>
+            <button class="btn-primary" id="modal-ok-btn">Take Dose ❤️</button>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR GALLERY IMAGES -->
+    <div id="lightbox-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="modal-close" id="lightbox-close-btn">&times;</button>
+            <img id="lightbox-img" src="" alt="Enlarged view">
+            <p id="lightbox-caption" class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
