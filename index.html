@@ -31,7 +31,7 @@
   <!-- INTRO GIFT BOX SCREEN -->
   <div id="intro-screen" class="intro-screen">
     <div class="stars-bg"></div>
-    <div class="gift-container">
+    <div class="gift-container" id="gift-container">
       <div class="pulse-ring"></div>
       <div class="gift-box" id="gift-box">
         <div class="gift-lid">
@@ -47,10 +47,16 @@
           <div class="ribbon-horizontal"></div>
         </div>
       </div>
-      <div class="gift-tag">
-        <i class="fas fa-heart text-pink"></i>
-        <span>Tap to Open Prince Karlupia's Birthday Surprise!</span>
-        <i class="fas fa-sparkles text-gold"></i>
+      
+      <!-- PROMINENT TOUCH-FRIENDLY BUTTON -->
+      <button id="open-gift-btn" class="start-touch-btn">
+        <i class="fas fa-gift"></i>
+        <span>TAP TO OPEN SURPRISE!</span>
+        <i class="fas fa-sparkles"></i>
+      </button>
+
+      <div class="gift-subtag">
+        <i class="fas fa-heart text-pink"></i> Prince Karlupia's Birthday Box
       </div>
     </div>
   </div>
@@ -372,6 +378,54 @@
           <div class="envelope-sticker"><i class="fas fa-heart"></i></div>
         </div>
       </div>
+    </section>
+
+    <!-- FUNNY SARCASTIC GAME SECTION: CHAI VS WIFE -->
+    <section class="game-section">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-gamepad"></i> Prince's Loyalty Test 🤪</h2>
+        <p class="section-desc">Answer honestly Prince: What do you love more in life? ☕ vs 💍</p>
+      </div>
+
+      <div class="game-card">
+        <h3 class="game-question">Choose Your True Love:</h3>
+
+        <div class="game-options-container" id="game-options-container">
+          
+          <!-- Option A: Chai -->
+          <div class="game-option-box" id="chai-option-box">
+            <div class="option-img-wrapper">
+              <img src="chai.jpg" alt="Hot Masala Chai">
+            </div>
+            <button id="chai-btn" class="game-choice-btn chai-choice">
+              ☕ Hot Masala Chai
+            </button>
+          </div>
+
+          <!-- Option B: Wife -->
+          <div class="game-option-box" id="wife-option-box">
+            <div class="option-img-wrapper">
+              <img src="5.jpeg" alt="Wife">
+            </div>
+            <button id="wife-btn" class="game-choice-btn wife-choice">
+              💖 My Beloved Wife
+            </button>
+          </div>
+
+        </div>
+
+        <div class="game-hint">
+          <p><i class="fas fa-hand-pointer text-pink"></i> Tap on <strong>Wife</strong> or <strong>Chai</strong> to see your true score! 😉</p>
+        </div>
+
+        <!-- SARCASTIC PRANK RESULT TEXT BOX -->
+        <div id="game-result-box" class="game-result-card hidden">
+          <div class="prank-text-box">
+            <h3 class="prank-main-question">Why did you click Chai? Don't you love your wife more? ☕💔</h3>
+            <p class="prank-sub-message">Prince Karlupia, even though you tried to choose your wife, the universe registered CHAI! ☕ Your wife is watching you! 😂💖</p>
+          </div>
+          <button id="retry-game-btn" class="cute-btn mini-btn">Try Choosing Wife Again? 💍</button>
+        </div>
     </section>
 
     <!-- FOOTER CELEBRATION -->

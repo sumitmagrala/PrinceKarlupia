@@ -78,9 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         osc.start();
         osc.stop(this.audioCtx.currentTime + duration / 1000);
-      } catch (e) {
-        console.log('Error playing note:', e);
-      }
+      } catch (e) {}
     }
 
     startMelody() {
@@ -234,38 +232,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ------------------------------------------------------------------------
-     3. INTRO GIFT UNBOXING INTERACTION (MOBILE TOUCH SUPPORT)
+     3. INTRO GIFT UNBOXING INTERACTION (TOUCH & BUTTON)
      ------------------------------------------------------------------------ */
   const introScreen = document.getElementById('intro-screen');
   const giftBox = document.getElementById('gift-box');
-  const giftContainer = document.querySelector('.gift-container');
+  const giftContainer = document.getElementById('gift-container');
+  const openGiftBtn = document.getElementById('open-gift-btn');
   const mainContent = document.getElementById('main-content');
   let isOpened = false;
 
   function openGift(e) {
+    if (e) e.stopPropagation();
     if (isOpened) return;
     isOpened = true;
 
-    // Direct touch gesture initializes AudioContext on Mobile iOS/Android
     bdayAudio.init();
     bdayAudio.playChime();
 
     giftBox.classList.add('open');
 
-    // Calculate center coordinates
     const rect = giftBox.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    launchConfettiBurst(120, centerX, centerY);
+    launchConfettiBurst(140, centerX, centerY);
 
-    // Auto-start music
     setTimeout(() => {
       bdayAudio.startMelody();
       musicToggleBtn.classList.add('playing');
     }, 300);
 
-    // Smooth transition
     setTimeout(() => {
       introScreen.classList.add('fade-out');
       mainContent.classList.remove('hidden');
@@ -276,7 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   }
 
-  giftContainer.addEventListener('click', openGift);
+  if (openGiftBtn) openGiftBtn.addEventListener('click', openGift);
+  if (giftContainer) giftContainer.addEventListener('click', openGift);
 
 
   /* ------------------------------------------------------------------------
@@ -416,7 +413,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ------------------------------------------------------------------------
-     8. FOOTER CELEBRATION BUTTON
+     8. FUNNY SARCASTIC GAME LOGIC: CHAI VS WIFE (TWIST OVERRIDE)
+     ------------------------------------------------------------------------ */
+  const chaiBtn = document.getElementById('chai-btn');
+  const wifeBtn = document.getElementById('wife-btn');
+  const chaiBox = document.getElementById('chai-option-box');
+  const wifeBox = document.getElementById('wife-option-box');
+  const gameResultBox = document.getElementById('game-result-box');
+  const retryGameBtn = document.getElementById('retry-game-btn');
+
+  function triggerChaiPrankResult(fromWife = false) {
+    bdayAudio.playChime();
+    
+    // Highlight Chai Box & Prank Wife Box
+    chaiBox.style.transform = 'scale(1.08)';
+    chaiBox.style.border = '3px solid #FFB703';
+    chaiBtn.style.background = 'linear-gradient(45deg, #FFB703, #FF9F1C)';
+    chaiBtn.innerHTML = '☕ CHAI REGISTERED!';
+
+    if (fromWife) {
+      wifeBtn.innerHTML = '💔 CHAI WAS SELECTED!';
+      wifeBtn.style.background = '#8E7C93';
+    }
+
+    // Burst confetti
+    const rect = chaiBox.getBoundingClientRect();
+    launchConfettiBurst(80, rect.left + rect.width / 2, rect.top);
+
+    // Show Prank Result Box cleanly on screen
+    gameResultBox.classList.remove('hidden');
+    gameResultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Clicking Wife triggers the prank text!
+  wifeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    triggerChaiPrankResult(true);
+  });
+
+  // Clicking Chai directly
+  chaiBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    triggerChaiPrankResult(false);
+  });
+
+  if (retryGameBtn) {
+    retryGameBtn.addEventListener('click', () => {
+      gameResultBox.classList.add('hidden');
+      chaiBox.style.transform = '';
+      chaiBox.style.border = '';
+      wifeBox.style.transform = '';
+      chaiBtn.innerHTML = '☕ Hot Masala Chai';
+      wifeBtn.innerHTML = '💖 My Beloved Wife';
+      wifeBtn.style.background = 'linear-gradient(45deg, #FF477E, #FF85A1)';
+    });
+  }
+
+
+  /* ------------------------------------------------------------------------
+     9. FOOTER CELEBRATION BUTTON
      ------------------------------------------------------------------------ */
   const footerBtn = document.getElementById('footer-celebrate-btn');
   footerBtn.addEventListener('click', () => {
