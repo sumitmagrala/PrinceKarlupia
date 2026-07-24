@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CUTE BIRTHDAY SURPRISE WEBSITE - JAVASCRIPT LOGIC
+   CUTE BIRTHDAY SURPRISE WEBSITE - MOBILE & TOUCH OPTIMIZED JS LOGIC
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
       this.isPlaying = false;
       this.noteTimeout = null;
       
-      // Happy Birthday Melody Notes & Durations
-      // [Frequency (Hz), Duration (ms)]
       this.notes = [
         { note: 261.63, duration: 300 }, // C4
         { note: 261.63, duration: 300 }, // C4
@@ -49,33 +47,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     init() {
-      if (!this.audioCtx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.audioCtx = new AudioContext();
-      }
-      if (this.audioCtx.state === 'suspended') {
-        this.audioCtx.resume();
+      try {
+        if (!this.audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.audioCtx = new AudioContext();
+        }
+        if (this.audioCtx && this.audioCtx.state === 'suspended') {
+          this.audioCtx.resume();
+        }
+      } catch (err) {
+        console.log('Audio init prevented:', err);
       }
     }
 
     playNote(freq, duration) {
       if (!this.audioCtx || !this.isPlaying) return;
 
-      const osc = this.audioCtx.createOscillator();
-      const gain = this.audioCtx.createGain();
+      try {
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
 
-      // Soft cute sine/triangle wave blend
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
 
-      gain.gain.setValueAtTime(0.2, this.audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + (duration / 1000) * 0.9);
+        gain.gain.setValueAtTime(0.18, this.audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + (duration / 1000) * 0.9);
 
-      osc.connect(gain);
-      gain.connect(this.audioCtx.destination);
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
 
-      osc.start();
-      osc.stop(this.audioCtx.currentTime + duration / 1000);
+        osc.start();
+        osc.stop(this.audioCtx.currentTime + duration / 1000);
+      } catch (e) {
+        console.log('Error playing note:', e);
+      }
     }
 
     startMelody() {
@@ -106,21 +111,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     playChime() {
       this.init();
-      const freqs = [523.25, 659.25, 783.99, 1046.50]; // C, E, G, C
+      const freqs = [523.25, 659.25, 783.99, 1046.50];
       freqs.forEach((freq, idx) => {
         setTimeout(() => {
-          if (!this.audioCtx) return;
-          const osc = this.audioCtx.createOscillator();
-          const gain = this.audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
-          gain.gain.setValueAtTime(0.3, this.audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.6);
-          osc.connect(gain);
-          gain.connect(this.audioCtx.destination);
-          osc.start();
-          osc.stop(this.audioCtx.currentTime + 0.6);
-        }, idx * 120);
+          if (!this.audioCtx || this.audioCtx.state === 'suspended') return;
+          try {
+            const osc = this.audioCtx.createOscillator();
+            const gain = this.audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.25, this.audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.5);
+            osc.connect(gain);
+            gain.connect(this.audioCtx.destination);
+            osc.start();
+            osc.stop(this.audioCtx.currentTime + 0.5);
+          } catch (e) {}
+        }, idx * 100);
       });
     }
   }
@@ -129,7 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Audio Toggle Button
   const musicToggleBtn = document.getElementById('music-toggle-btn');
-  musicToggleBtn.addEventListener('click', () => {
+  const toggleMusic = (e) => {
+    e.stopPropagation();
+    bdayAudio.init();
     if (bdayAudio.isPlaying) {
       bdayAudio.stop();
       musicToggleBtn.classList.remove('playing');
@@ -137,11 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
       bdayAudio.startMelody();
       musicToggleBtn.classList.add('playing');
     }
-  });
+  };
+
+  musicToggleBtn.addEventListener('click', toggleMusic);
 
 
   /* ------------------------------------------------------------------------
-     2. CANVAS CONFETTI & SPARKLES SYSTEM
+     2. CANVAS CONFETTI SYSTEM
      ------------------------------------------------------------------------ */
   const canvas = document.getElementById('confetti-canvas');
   const ctx = canvas.getContext('2d');
@@ -160,12 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
     constructor(x, y) {
       this.x = x !== undefined ? x : Math.random() * width;
       this.y = y !== undefined ? y : -20;
-      this.size = Math.random() * 8 + 6;
+      this.size = Math.random() * 7 + 5;
       this.color = colors[Math.floor(Math.random() * colors.length)];
-      this.speedY = Math.random() * 4 + 2;
-      this.speedX = Math.random() * 4 - 2;
+      this.speedY = Math.random() * 3.5 + 1.5;
+      this.speedX = Math.random() * 3 - 1.5;
       this.rotation = Math.random() * 360;
-      this.rotSpeed = Math.random() * 6 - 3;
+      this.rotSpeed = Math.random() * 5 - 2.5;
       this.shape = Math.random() > 0.3 ? 'circle' : 'rect';
       this.opacity = 1;
     }
@@ -197,11 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function launchConfettiBurst(count = 100, originX = width / 2, originY = height / 3) {
+  function launchConfettiBurst(count = 80, originX = width / 2, originY = height / 3) {
     for (let i = 0; i < count; i++) {
       const p = new Confetti(originX, originY);
-      p.speedX = (Math.random() - 0.5) * 14;
-      p.speedY = (Math.random() - 0.7) * 14;
+      p.speedX = (Math.random() - 0.5) * 12;
+      p.speedY = (Math.random() - 0.7) * 12;
       confettiPieces.push(p);
     }
   }
@@ -223,39 +234,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ------------------------------------------------------------------------
-     3. INTRO GIFT UNBOXING INTERACTION
+     3. INTRO GIFT UNBOXING INTERACTION (MOBILE TOUCH SUPPORT)
      ------------------------------------------------------------------------ */
   const introScreen = document.getElementById('intro-screen');
   const giftBox = document.getElementById('gift-box');
+  const giftContainer = document.querySelector('.gift-container');
   const mainContent = document.getElementById('main-content');
+  let isOpened = false;
 
-  giftBox.addEventListener('click', () => {
-    giftBox.classList.add('open');
+  function openGift(e) {
+    if (isOpened) return;
+    isOpened = true;
+
+    // Direct touch gesture initializes AudioContext on Mobile iOS/Android
+    bdayAudio.init();
     bdayAudio.playChime();
 
-    // Burst confetti from box center
+    giftBox.classList.add('open');
+
+    // Calculate center coordinates
     const rect = giftBox.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    launchConfettiBurst(150, centerX, centerY);
+    launchConfettiBurst(120, centerX, centerY);
 
-    // Auto-start music melody
+    // Auto-start music
     setTimeout(() => {
       bdayAudio.startMelody();
       musicToggleBtn.classList.add('playing');
-    }, 400);
+    }, 300);
 
-    // Fade intro and reveal main website
+    // Smooth transition
     setTimeout(() => {
       introScreen.classList.add('fade-out');
       mainContent.classList.remove('hidden');
       
       setTimeout(() => {
         introScreen.style.display = 'none';
-      }, 800);
-    }, 1200);
-  });
+      }, 700);
+    }, 1000);
+  }
+
+  giftContainer.addEventListener('click', openGift);
 
 
   /* ------------------------------------------------------------------------
@@ -281,7 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   candles.forEach(candle => {
-    candle.addEventListener('click', () => {
+    candle.addEventListener('click', (e) => {
+      e.stopPropagation();
       extinguishCandle(candle);
     });
   });
@@ -291,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function onAllCandlesBlown() {
-    launchConfettiBurst(200, width / 2, height / 2);
+    launchConfettiBurst(180, width / 2, height / 2);
     blowBtn.style.display = 'none';
     wishCard.classList.remove('hidden-wish');
   }
@@ -320,20 +342,19 @@ document.addEventListener('DOMContentLoaded', () => {
   polaroids.forEach(card => {
     const heartBtn = card.querySelector('.heart-btn');
     
-    // Heart like toggle
     heartBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       heartBtn.classList.toggle('liked');
       const icon = heartBtn.querySelector('i');
       if (heartBtn.classList.contains('liked')) {
         icon.className = 'fas fa-heart text-pink';
-        launchConfettiBurst(20, e.clientX, e.clientY);
+        const rect = heartBtn.getBoundingClientRect();
+        launchConfettiBurst(20, rect.left, rect.top);
       } else {
         icon.className = 'far fa-heart';
       }
     });
 
-    // Open lightbox
     card.addEventListener('click', () => {
       const imgSrc = card.getAttribute('data-img');
       const caption = card.getAttribute('data-caption');
@@ -342,20 +363,23 @@ document.addEventListener('DOMContentLoaded', () => {
       lightboxImg.src = imgSrc;
       lightboxTitle.textContent = caption;
       lightboxDesc.textContent = sub;
-      likeCountSpan.textContent = Math.floor(Math.random() * 20) + 5;
+      likeCountSpan.textContent = Math.floor(Math.random() * 15) + 8;
 
       lightboxModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     });
   });
 
   function closeLightbox() {
     lightboxModal.classList.add('hidden');
+    document.body.style.overflow = '';
   }
 
   lightboxClose.addEventListener('click', closeLightbox);
   lightboxBackdrop.addEventListener('click', closeLightbox);
 
-  lightboxLikeBtn.addEventListener('click', () => {
+  lightboxLikeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     let currentLikes = parseInt(likeCountSpan.textContent);
     likeCountSpan.textContent = currentLikes + 1;
     bdayAudio.playChime();
@@ -385,7 +409,8 @@ document.addEventListener('DOMContentLoaded', () => {
     envelope.classList.toggle('open');
     if (envelope.classList.contains('open')) {
       bdayAudio.playChime();
-      launchConfettiBurst(50, envelope.offsetLeft + envelope.offsetWidth / 2, envelope.offsetTop);
+      const rect = envelope.getBoundingClientRect();
+      launchConfettiBurst(50, rect.left + rect.width / 2, rect.top);
     }
   });
 
@@ -395,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ------------------------------------------------------------------------ */
   const footerBtn = document.getElementById('footer-celebrate-btn');
   footerBtn.addEventListener('click', () => {
-    launchConfettiBurst(300, width / 2, height / 2);
+    launchConfettiBurst(250, width / 2, height / 2);
     bdayAudio.playChime();
   });
 

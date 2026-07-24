@@ -938,14 +938,15 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   9. INTERACTIVE ENVELOPE / LOVE LETTER
+   9. INTERACTIVE ENVELOPE / LOVE LETTER (MOBILE-OPTIMIZED)
    -------------------------------------------------------------------------- */
 .letter-section {
-  padding: 40px 0 60px;
+  padding: 30px 0 50px;
 }
 
 .envelope-wrapper {
-  max-width: 500px;
+  max-width: 420px;
+  width: 90%;
   margin: 0 auto;
   perspective: 1000px;
 }
@@ -953,27 +954,23 @@ body {
 .envelope {
   position: relative;
   width: 100%;
-  height: 280px;
+  height: 240px;
   background: #FF85A1;
   border-radius: 0 0 16px 16px;
-  box-shadow: 0 15px 35px rgba(255, 133, 161, 0.3);
+  box-shadow: 0 12px 30px rgba(255, 133, 161, 0.3);
   cursor: pointer;
-  transition: transform 0.4s ease;
-}
-
-.envelope:hover {
-  transform: translateY(-6px);
+  touch-action: manipulation;
+  transition: transform 0.3s ease;
 }
 
 .envelope-top {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0;
-  height: 0;
-  border-left: 250px solid transparent;
-  border-right: 250px solid transparent;
-  border-top: 150px solid #FF6B8B;
+  width: 100%;
+  height: 130px;
+  background: #FF6B8B;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top;
   transition: transform 0.6s ease 0.2s, z-index 0.2s ease 0.4s;
   z-index: 4;
@@ -986,35 +983,35 @@ body {
 
 .envelope-paper {
   position: absolute;
-  bottom: 10px;
-  left: 5%;
-  width: 90%;
-  height: 90%;
+  bottom: 8px;
+  left: 4%;
+  width: 92%;
+  height: 88%;
   background: #FFFFFF;
   border-radius: 12px;
-  padding: 25px 20px;
+  padding: 20px 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
   z-index: 2;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .envelope.open .envelope-paper {
-  transform: translateY(-160px);
-  height: 320px;
+  transform: translateY(-130px);
+  height: 280px;
   z-index: 5;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
 }
 
 .envelope-front {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0;
-  height: 0;
-  border-left: 250px solid #FF9EAA;
-  border-right: 250px solid #FF9EAA;
-  border-bottom: 150px solid #FF85A1;
+  width: 100%;
+  height: 100%;
+  background: #FF85A1;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
   border-radius: 0 0 16px 16px;
   z-index: 3;
   pointer-events: none;
@@ -1022,7 +1019,7 @@ body {
 
 .envelope-sticker {
   position: absolute;
-  top: 130px;
+  top: 110px;
   left: 50%;
   transform: translateX(-50%);
   width: 44px;
@@ -1046,41 +1043,25 @@ body {
 
 .letter-content h3 {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--deep-pink);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .letter-content p {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.55;
   color: var(--text-dark);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .letter-sign {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--primary-pink);
   text-align: right;
-  margin-top: 15px;
-}
-
-/* Adjust envelope responsive sizing */
-@media (max-width: 550px) {
-  .envelope { height: 220px; }
-  .envelope-top {
-    border-left-width: calc(50vw - 20px);
-    border-right-width: calc(50vw - 20px);
-    border-top-width: 120px;
-  }
-  .envelope-front {
-    border-left-width: calc(50vw - 20px);
-    border-right-width: calc(50vw - 20px);
-    border-bottom-width: 120px;
-  }
-  .envelope-sticker { top: 100px; }
+  margin-top: 10px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1096,7 +1077,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 15px;
 }
 
 .lightbox-backdrop {
@@ -1105,51 +1086,48 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(40, 25, 45, 0.75);
+  background: rgba(30, 15, 35, 0.82);
   backdrop-filter: blur(8px);
 }
 
 .lightbox-container {
   position: relative;
   background: #FFFFFF;
-  border-radius: var(--radius-lg);
-  max-width: 800px;
+  border-radius: var(--radius-md);
+  max-width: 750px;
   width: 100%;
   max-height: 90vh;
-  overflow: hidden;
+  overflow-y: auto;
   z-index: 10;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
   animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-overflow-scrolling: touch;
 }
 
 @keyframes modalPop {
-  0% { transform: scale(0.8); opacity: 0; }
+  0% { transform: scale(0.85); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
 .lightbox-close-btn {
   position: absolute;
-  top: 15px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.8);
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.9);
   border: none;
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 1;
   color: var(--text-dark);
   cursor: pointer;
   z-index: 20;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.lightbox-close-btn:hover {
-  background: var(--deep-pink);
-  color: #FFF;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  touch-action: manipulation;
 }
 
 .lightbox-content {
@@ -1160,18 +1138,22 @@ body {
 .lightbox-img-box {
   flex: 1.2;
   background: #000;
-  max-height: 500px;
+  max-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lightbox-img-box img {
   width: 100%;
   height: 100%;
+  max-height: 450px;
   object-fit: contain;
 }
 
 .lightbox-details {
   flex: 1;
-  padding: 35px 25px;
+  padding: 25px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1179,43 +1161,202 @@ body {
 
 .lightbox-details h3 {
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: var(--deep-pink);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .lightbox-details p {
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.5;
   color: var(--text-dark);
-  margin-bottom: 25px;
-}
-
-@media (max-width: 768px) {
-  .lightbox-content {
-    flex-direction: column;
-  }
-  .lightbox-img-box {
-    max-height: 300px;
-  }
-  .lightbox-details {
-    padding: 20px;
-  }
+  margin-bottom: 20px;
 }
 
 /* --------------------------------------------------------------------------
-   11. FOOTER
+   11. FOOTER & GLOBAL MOBILE MEDIA QUERIES
    -------------------------------------------------------------------------- */
 .cute-footer {
   text-align: center;
-  padding: 40px 20px 20px;
+  padding: 30px 15px 20px;
   border-top: 2px dashed rgba(255, 133, 161, 0.3);
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .cute-footer p {
   font-family: var(--font-cute);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
+
+/* TOUCH & SMALL SCREEN OPTIMIZATIONS (< 768px) */
+@media (max-width: 768px) {
+  html, body {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .main-content {
+    padding: 20px 12px 60px;
+  }
+
+  .audio-control-bar {
+    top: 12px;
+    right: 12px;
+  }
+
+  .audio-btn {
+    width: 46px;
+    height: 46px;
+    font-size: 1.1rem;
+  }
+
+  /* Intro Gift Box for Mobile */
+  .gift-box {
+    width: 140px;
+    height: 140px;
+  }
+  .gift-body { height: 105px; }
+  .gift-lid { width: 152px; height: 40px; left: -6px; }
+  .gift-tag {
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    margin-top: 25px;
+    text-align: center;
+    max-width: 85vw;
+  }
+
+  /* Hero Section Mobile */
+  .hero-section {
+    padding: 20px 10px 30px;
+  }
+
+  .hero-badge {
+    font-size: 0.9rem;
+    padding: 6px 16px;
+  }
+
+  .hero-photo-wrapper {
+    width: 170px;
+    height: 170px;
+    margin-bottom: 20px;
+  }
+
+  .crown-decoration {
+    font-size: 2.3rem;
+    top: -18px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 7.5vw, 3.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  .banner-ribbon {
+    font-size: 0.95rem;
+    padding: 8px 18px;
+    max-width: 95%;
+  }
+
+  /* Cake & Candle Mobile */
+  .cake-section {
+    padding: 30px 15px;
+    margin: 25px 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .cake-wrapper {
+    width: 230px;
+    height: 200px;
+  }
+
+  .cake { width: 200px; }
+  .plate { width: 220px; }
+  .layer-bottom { width: 180px; height: 55px; }
+  .layer-middle { width: 140px; height: 48px; }
+  .layer-top { width: 100px; height: 42px; }
+
+  .candles-container {
+    gap: 18px;
+    top: -34px;
+  }
+
+  .candle {
+    width: 18px;
+    height: 44px;
+    /* Larger tap area for mobile fingers */
+    padding: 10px 5px;
+  }
+
+  .flame {
+    width: 18px;
+    height: 26px;
+    top: -24px;
+    left: 0;
+  }
+
+  .cute-btn {
+    font-size: 1rem;
+    padding: 12px 22px;
+    width: 100%;
+    max-width: 290px;
+    justify-content: center;
+  }
+
+  /* Polaroid Gallery Mobile */
+  .polaroid-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px 15px;
+  }
+
+  /* Reduce tilt on mobile to prevent overflow */
+  .polaroid-card {
+    transform: rotate(0deg) !important;
+    padding: 12px 12px 18px;
+  }
+
+  .polaroid-img-wrapper {
+    height: 230px;
+  }
+
+  .polaroid-caption {
+    font-size: 1.25rem;
+  }
+
+  /* Flip Cards Mobile */
+  .flip-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .flip-card {
+    height: 190px;
+  }
+
+  .flip-card-front, .flip-card-back {
+    padding: 18px;
+  }
+
+  /* Lightbox Mobile */
+  .lightbox-content {
+    flex-direction: column;
+  }
+
+  .lightbox-img-box {
+    max-height: 280px;
+  }
+
+  .lightbox-details {
+    padding: 18px 15px;
+  }
+}
+
