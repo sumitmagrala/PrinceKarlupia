@@ -242,6 +242,12 @@
       </nav>
 
       <div class="flex items-center space-x-3">
+        <!-- Background Music Control Button -->
+        <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" class="px-3.5 py-1.5 rounded-full border border-royal-gold text-royal-maroon hover:bg-royal-maroon hover:text-royal-gold transition-all bg-white/95 text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-sm">
+          <i data-lucide="volume-2" id="musicIcon" class="w-3.5 h-3.5 text-royal-gold"></i>
+          <span id="musicText" class="hidden sm:inline">Play Music</span>
+        </button>
+
         <!-- Auth Status Button (Guest Login) -->
         <button id="navAuthBtn" onclick="handleAuthAction()" class="px-3.5 py-1.5 rounded-full border border-royal-maroon text-royal-maroon text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:bg-royal-maroon hover:text-royal-gold transition-all bg-white/90">
           <i data-lucide="user" class="w-3.5 h-3.5 text-royal-gold"></i>
@@ -991,8 +997,10 @@
     </div>
   </footer>
 
-
-
+  <!-- Wedding Background Music Audio Element -->
+  <audio id="weddingBgAudio" loop preload="auto">
+    <source src="background_music.mp3" type="audio/mp3">
+  </audio>
 
   <!-- ============================================== -->
   <!-- JAVASCRIPT LOGIC & MARIGOLD PETAL ANIMATIONS   -->
@@ -1107,9 +1115,67 @@
           modal.style.display = 'none';
         }, 700);
       }, 1500);
+
+      // Play background music upon opening the royal invitation envelope
+      playBackgroundMusic();
     }
 
+    // 3. Background Music Controller
+    let isMusicPlaying = false;
+    const bgAudio = document.getElementById('weddingBgAudio');
+    const musicBtn = document.getElementById('musicToggleBtn');
+    const musicText = document.getElementById('musicText');
+    const musicIcon = document.getElementById('musicIcon');
 
+    function playBackgroundMusic() {
+      if (!bgAudio) return;
+      bgAudio.volume = 0.65;
+      bgAudio.play().then(() => {
+        isMusicPlaying = true;
+        updateMusicUI(true);
+      }).catch(err => {
+        console.log("Audio autoplay prevented by browser policy:", err);
+      });
+    }
+
+    function toggleBackgroundMusic() {
+      if (!bgAudio) return;
+      if (isMusicPlaying) {
+        bgAudio.pause();
+        isMusicPlaying = false;
+        updateMusicUI(false);
+      } else {
+        bgAudio.volume = 0.65;
+        bgAudio.play().then(() => {
+          isMusicPlaying = true;
+          updateMusicUI(true);
+        }).catch(err => {
+          console.log("Audio play error:", err);
+        });
+      }
+    }
+
+    function updateMusicUI(playing) {
+      if (!musicBtn) return;
+      if (playing) {
+        musicBtn.classList.add('bg-royal-maroon', 'text-royal-gold', 'border-royal-gold');
+        musicBtn.classList.remove('bg-white/95', 'text-royal-maroon');
+        if (musicText) musicText.innerText = 'Pause Music';
+        if (musicIcon) {
+          musicIcon.setAttribute('data-lucide', 'volume-2');
+          musicIcon.classList.add('text-royal-gold');
+        }
+      } else {
+        musicBtn.classList.remove('bg-royal-maroon', 'text-royal-gold', 'border-royal-gold');
+        musicBtn.classList.add('bg-white/95', 'text-royal-maroon');
+        if (musicText) musicText.innerText = 'Play Music';
+        if (musicIcon) {
+          musicIcon.setAttribute('data-lucide', 'volume-x');
+          musicIcon.classList.remove('text-royal-gold');
+        }
+      }
+      lucide.createIcons();
+    }
 
     // 4. Live Countdown to Wedding Day (Nov 1, 2026, 9:30 AM)
     const weddingDate = new Date('November 1, 2026 09:30:00').getTime();
