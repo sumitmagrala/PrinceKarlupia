@@ -176,6 +176,22 @@
       }
     }
 
+    /* Responsive & Mobile Overflow Protection */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+    }
+
     /* Mobile UX & Tap Targets */
     button, a {
       touch-action: manipulation;
@@ -312,8 +328,10 @@
         Royal Shahi Vivah &bull; The Punjabi Wedding Celebration
       </p>
 
-      <h1 class="font-cinzel text-4xl xs:text-5xl sm:text-7xl md:text-8xl tracking-tight text-royal-maroon font-bold leading-tight mb-3">
-        Prince <span class="font-script text-5xl xs:text-6xl sm:text-8xl md:text-9xl shimmer-gold -ml-2 sm:-ml-3 -mr-2 sm:-mr-3">&amp;</span> Preet
+      <h1 class="font-cinzel text-3xl sm:text-7xl md:text-8xl tracking-tight text-royal-maroon font-bold leading-tight mb-3 flex items-center justify-center flex-wrap gap-x-2">
+        <span>Prince</span>
+        <span class="font-script text-4xl sm:text-8xl md:text-9xl shimmer-gold leading-none">&amp;</span>
+        <span>Preet</span>
       </h1>
 
       <!-- Parents Lineage & Blessings -->
@@ -1037,11 +1055,12 @@
   <!-- JAVASCRIPT LOGIC & MARIGOLD PETAL ANIMATIONS   -->
   <!-- ============================================== -->
   <script>
-    // Initialize AOS
+    // Initialize AOS with mobile overflow safety
     AOS.init({
       once: true,
-      duration: 1000,
-      easing: 'ease-out-cubic'
+      duration: 800,
+      easing: 'ease-out-cubic',
+      disable: window.innerWidth < 640 // Disable side-sliding transforms on mobile to guarantee zero overflow skew
     });
 
     // Initialize Lucide icons
