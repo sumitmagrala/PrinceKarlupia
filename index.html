@@ -1,466 +1,1677 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Happy Birthday Prince Karlupia! 🎂✨</title>
-  <meta name="description" content="A cute birthday surprise for Prince Karlupia filled with sweet memories, candles, music, and love!">
-  <!-- Google Fonts -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prince & Preet | Royal Punjabi Wedding & Anand Karaj</title>
+  
+  <!-- Google Fonts (Gurmukhi + Royal Serif & Scripts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Rozha+One&family=Alex+Brush&family=Tiro+Gurmukhi:ital@0;1&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- QR Code Generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Firebase SDKs (v10 compat mode for reliable vanilla JS execution) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: {
+              maroon: '#4A0E17',
+              deepWine: '#2C060B',
+              ruby: '#7A1826',
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              goldDark: '#997A15',
+              cream: '#FDFBF7',
+              warmSand: '#F7EFE2',
+              emerald: '#1C3D2F',
+              saffron: '#E65C00',
+              roseFuchsia: '#9B1B48'
+            }
+          },
+          fontFamily: {
+            cinzel: ['"Cinzel"', 'serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            script: ['"Alex Brush"', 'cursive'],
+            gurmukhi: ['"Tiro Gurmukhi"', 'serif'],
+            rozha: ['"Rozha One"', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FDFBF7;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D4AF37;
+      border-radius: 4px;
+    }
+
+    /* Royal Punjabi Gold Foil Shimmer Animation */
+    .shimmer-gold {
+      background: linear-gradient(90deg, #997A15 0%, #FDF3C7 25%, #D4AF37 50%, #FDF3C7 75%, #997A15 100%);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: royalShine 4s linear infinite;
+    }
+
+    @keyframes royalShine {
+      to { background-position: 200% center; }
+    }
+
+    /* Royal Paisley & Jali Pattern Backdrop */
+    .jali-pattern {
+      background-color: #FDFBF7;
+      background-image: radial-gradient(#D4AF37 0.75px, transparent 0.75px), radial-gradient(#D4AF37 0.75px, #FDFBF7 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+
+    .maroon-pattern {
+      background-color: #2C060B;
+      background-image: radial-gradient(rgba(212, 175, 55, 0.25) 0.8px, transparent 0.8px);
+      background-size: 24px 24px;
+    }
+
+    /* Wax Seal Pulse Animation */
+    .wax-pulse {
+      animation: punjabiSealGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes punjabiSealGlow {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7), 0 10px 30px rgba(74, 14, 23, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 0 18px rgba(212, 175, 55, 0), 0 14px 40px rgba(74, 14, 23, 0.9);
+      }
+    }
+
+    /* 3D Envelope Physics */
+    .envelope-box {
+      perspective: 1000px;
+    }
+    .envelope-flap {
+      transform-origin: top center;
+      transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .envelope-open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 10;
+    }
+    .envelope-letter {
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s, opacity 0.7s ease 0.45s;
+    }
+    .envelope-open .envelope-letter {
+      transform: translateY(-115px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    /* Floating Marigold Petals Canvas */
+    #petalsCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 35;
+    }
+
+    /* Punjabi Royal Glass Cards */
+    .royal-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .royal-card:hover {
+      transform: translateY(-8px) scale(1.015);
+      border-color: rgba(212, 175, 55, 0.85);
+      box-shadow: 0 20px 40px -10px rgba(122, 24, 38, 0.2);
+    }
+
+    /* Golden Arch Border */
+    .royal-arch {
+      border-radius: 120px 120px 24px 24px;
+    }
+  </style>
 </head>
-<body>
+<body class="jali-pattern text-[#222222] font-sans antialiased overflow-x-hidden selection:bg-royal-gold selection:text-royal-maroon relative">
 
-  <!-- Canvas for Confetti & Particles -->
-  <canvas id="confetti-canvas"></canvas>
+  <!-- Interactive Floating Marigold & Golden Stardust Canvas -->
+  <canvas id="petalsCanvas"></canvas>
 
-  <!-- Sound / Music Controls -->
-  <div class="audio-control-bar">
-    <button id="music-toggle-btn" class="audio-btn" title="Toggle Happy Birthday Melody">
-      <i class="fas fa-music"></i>
-      <span class="music-wave-bars">
-        <span></span><span></span><span></span>
-      </span>
-    </button>
-  </div>
-
-  <!-- INTRO GIFT BOX SCREEN -->
-  <div id="intro-screen" class="intro-screen">
-    <div class="stars-bg"></div>
-    <div class="gift-container" id="gift-container">
-      <div class="pulse-ring"></div>
-      <div class="gift-box" id="gift-box">
-        <div class="gift-lid">
-          <div class="gift-bow">
-            <div class="bow-left"></div>
-            <div class="bow-right"></div>
-            <div class="bow-center"></div>
-          </div>
-          <div class="ribbon-vertical"></div>
-        </div>
-        <div class="gift-body">
-          <div class="ribbon-vertical"></div>
-          <div class="ribbon-horizontal"></div>
-        </div>
+  <!-- ============================================== -->
+  <!-- 1. ROYAL DIGITAL ENVELOPE UNBOXING (POP-UP)    -->
+  <!-- ============================================== -->
+  <div id="envelopeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-xl transition-all duration-700 p-4">
+    <div class="relative w-full max-w-lg text-center envelope-box">
+      
+      <!-- Gurmukhi Blessing Badge -->
+      <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-royal-maroon/90 border-2 border-royal-gold/60 text-royal-goldLight text-xs tracking-[0.25em] uppercase mb-6 shadow-2xl animate-bounce">
+        <span class="font-gurmukhi text-sm font-bold">ੴ ਸਤਿਗੁਰ ਪ੍ਰਸਾਦਿ</span> &bull; <span>Royal Shahi Dawat</span>
       </div>
       
-      <!-- PROMINENT TOUCH-FRIENDLY BUTTON -->
-      <button id="open-gift-btn" class="start-touch-btn">
-        <i class="fas fa-gift"></i>
-        <span>TAP TO OPEN SURPRISE!</span>
-        <i class="fas fa-sparkles"></i>
+      <!-- Envelope Container -->
+      <div id="envelopeContainer" class="relative mx-auto w-80 sm:w-[430px] h-64 sm:h-76 bg-[#6E1422] rounded-b-2xl shadow-[0_30px_80px_rgba(0,0,0,0.7)] overflow-visible border-2 border-royal-gold/60">
+        
+        <!-- Inside Shahi Card Letter -->
+        <div id="envelopeLetter" class="envelope-letter absolute inset-x-5 top-4 bottom-2 bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E0] to-[#F5E6CC] rounded-xl shadow-2xl p-4 sm:p-5 flex flex-col items-center justify-center border-2 border-royal-gold/60 text-center">
+          <p class="font-gurmukhi text-royal-maroon text-[11px] font-semibold tracking-wider">ੴ ਲਖ ਖੁਸੀਆ ਪਾਤਿਸਾਹੀਆ ਜੇ ਸਤਿਗੁਰੁ ਨਦਰਿ ਕਰੇਇ ॥</p>
+          <p class="font-cinzel text-[9px] uppercase tracking-[0.25em] text-royal-goldDark font-bold mt-1">The Royal Wedding of</p>
+          <h2 class="font-script text-3xl sm:text-4xl text-royal-maroon my-0.5 shimmer-gold">Prince &amp; Preet</h2>
+          
+          <!-- Parents Blessings -->
+          <div class="my-1.5 text-[10px] sm:text-[11px] text-gray-700 font-serif leading-tight">
+            <p><span class="font-bold text-royal-maroon">S/o:</span> Smt. Kanta Devi &amp; Sh. Manohar Lal</p>
+            <p><span class="font-bold text-royal-maroon">D/o:</span> Smt. Sunita Devi &amp; Sh. Balbir Raj</p>
+          </div>
+
+          <p class="text-[10px] uppercase tracking-[0.2em] text-royal-goldDark font-bold">Nov 1 &amp; 3, 2026</p>
+          <div class="w-12 h-0.5 bg-royal-gold/60 my-1"></div>
+          <span class="text-[10px] text-royal-maroon/80 font-serif italic">Cordially invite you to bless the newly wed couple</span>
+        </div>
+
+        <!-- Upper Triangle Flap with Gold Brocade Border -->
+        <div id="envelopeFlap" class="envelope-flap absolute top-0 inset-x-0 h-36 bg-[#5A0E19] border-b-2 border-royal-gold origin-top rounded-t-sm [clip-path:polygon(0_0,100%_0,50%_100%)] shadow-xl"></div>
+
+        <!-- Punjabi Royal Wax Seal (Khanda / P&P Monogram) -->
+        <div class="absolute inset-0 flex items-center justify-center z-30 pt-4">
+          <button id="openEnvelopeBtn" onclick="openEnvelope()" class="wax-pulse group w-24 h-24 rounded-full bg-gradient-to-b from-[#8B1A2A] to-[#450810] border-4 border-royal-gold text-royal-goldLight flex flex-col items-center justify-center transition-all duration-300 hover:scale-115 active:scale-95 cursor-pointer focus:outline-none">
+            <span class="text-lg">☬</span>
+            <span class="font-cinzel font-bold text-xs tracking-wider mt-[-3px]">P&amp;P</span>
+            <span class="text-[9px] uppercase font-bold tracking-widest text-amber-200 group-hover:tracking-[0.2em] transition-all">Break Seal</span>
+          </button>
+        </div>
+
+        <!-- Lower Geometric Envelope Folds -->
+        <div class="absolute bottom-0 inset-x-0 h-full pointer-events-none [clip-path:polygon(0_100%,50%_46%,100%_100%)] bg-[#63101E] border-t border-royal-gold/40 z-20"></div>
+        <div class="absolute bottom-0 left-0 w-full h-full pointer-events-none [clip-path:polygon(0_0,0_100%,50%_52%)] bg-[#550C18] z-20"></div>
+        <div class="absolute bottom-0 right-0 w-full h-full pointer-events-none [clip-path:polygon(100%_0,100%_100%,50%_52%)] bg-[#4D0B16] z-20"></div>
+      </div>
+
+      <p class="text-royal-goldLight text-xs mt-8 tracking-[0.25em] uppercase font-medium">Click the royal wax seal to unfold</p>
+    </div>
+  </div>
+
+
+  <!-- ============================================== -->
+  <!-- 2. STICKY ROYAL NAVIGATION                     -->
+  <!-- ============================================== -->
+  <header class="sticky top-0 z-40 bg-royal-cream/90 backdrop-blur-md border-b-2 border-royal-gold/30 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="font-cinzel text-xl sm:text-2xl tracking-widest text-royal-maroon uppercase font-bold group flex items-center gap-1.5">
+        <span class="text-royal-gold text-lg">☬</span>
+        <span>P</span> <span class="text-royal-gold text-3xl font-script group-hover:scale-125 transition-transform inline-block">&amp;</span> <span>P</span>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-6 text-xs uppercase tracking-widest font-bold text-royal-maroon">
+        <a href="#rituals" class="hover:text-royal-gold transition-colors">Traditions</a>
+        <a href="#events" class="hover:text-royal-gold transition-colors">Events</a>
+        <a href="#live-feed" class="text-royal-ruby hover:text-royal-gold transition-colors flex items-center gap-1 font-extrabold"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Live Photos</a>
+        <a href="#venue" class="hover:text-royal-gold transition-colors">Venue</a>
+        <a href="#gallery" class="hover:text-royal-gold transition-colors">Moments</a>
+        <a href="#rsvp" class="hover:text-royal-gold transition-colors">RSVP</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <!-- Auth Status Button (Guest Login) -->
+        <button id="navAuthBtn" onclick="handleAuthAction()" class="px-3.5 py-1.5 rounded-full border border-royal-maroon text-royal-maroon text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:bg-royal-maroon hover:text-royal-gold transition-all bg-white/90">
+          <i data-lucide="user" class="w-3.5 h-3.5 text-royal-gold"></i>
+          <span id="navAuthText">Guest Login</span>
+        </button>
+        <a href="#rsvp" class="px-4 sm:px-5 py-2 sm:py-2.5 text-xs uppercase tracking-[0.2em] font-bold rounded-full bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold border border-royal-gold/60 shadow-md hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+          RSVP
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================== -->
+  <!-- 3. HERO SECTION (ROYAL PUNJABI PALACE STYLE)   -->
+  <!-- ============================================== -->
+  <section id="hero" class="relative min-h-[92vh] flex items-center justify-center text-center px-4 overflow-hidden">
+    <!-- Ambient gold halo -->
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.22)_0%,_transparent_75%)] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto py-14" data-aos="fade-up" data-aos-duration="1200">
+      
+      <!-- Gurmukhi Mool Mantar snippet / Wedding Slok -->
+      <div class="inline-flex items-center justify-center gap-3 mb-5 px-6 py-2 rounded-full bg-white/80 border border-royal-gold/40 shadow-sm" data-aos="zoom-in">
+        <span class="text-royal-gold text-base">☬</span>
+        <span class="font-gurmukhi text-sm sm:text-base text-royal-maroon font-semibold">ੴ ਧਨੁ ਪਿਰੁ ਏਹਿ ਨ ਆਖੀਅਨਿ ਬਹਨਿ ਇਕਠੇ ਹੋਇ ॥ ਏਕ ਜੋਤਿ ਦੁਇ ਮੂਰਤੀ ਧਨ ਪਿਰੁ ਕਹੀਐ ਸੋਇ ॥</span>
+        <span class="text-royal-gold text-base">☬</span>
+      </div>
+
+      <p class="text-xs uppercase tracking-[0.35em] text-royal-goldDark font-bold mb-3">
+        Royal Shahi Vivah &bull; The Punjabi Wedding Celebration
+      </p>
+
+      <h1 class="font-cinzel text-5xl sm:text-7xl md:text-8xl tracking-tight text-royal-maroon font-bold leading-none mb-3">
+        Prince <span class="font-script text-6xl sm:text-8xl md:text-9xl shimmer-gold -ml-3 -mr-3">&amp;</span> Preet
+      </h1>
+
+      <!-- Parents Lineage & Blessings -->
+      <div class="max-w-xl mx-auto mb-6 px-6 py-3.5 rounded-2xl bg-white/80 border border-royal-gold/50 shadow-sm backdrop-blur-sm" data-aos="fade-up" data-aos-delay="150">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-gray-800 font-serif">
+          <div class="sm:border-r border-royal-gold/40 sm:pr-3">
+            <span class="text-[10px] uppercase font-bold text-royal-goldDark tracking-widest block mb-0.5">Groom's Parents</span>
+            <p class="font-bold text-royal-maroon">Smt. Kanta Devi &amp; Sh. Manohar Lal</p>
+          </div>
+          <div class="sm:pl-3">
+            <span class="text-[10px] uppercase font-bold text-royal-goldDark tracking-widest block mb-0.5">Bride's Parents</span>
+            <p class="font-bold text-royal-maroon">Smt. Sunita Devi &amp; Sh. Balbir Raj</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="font-serif italic text-xl sm:text-2xl text-gray-700 max-w-2xl mx-auto mb-8 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+        "Two souls embarking upon the sacred journey of Anand Karaj, united as one light under the grace of Akal Purakh."
+      </p>
+
+      <!-- Key Dates Banners -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs tracking-widest uppercase font-bold text-royal-maroon mb-10" data-aos="fade-up" data-aos-delay="300">
+        <span class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-royal-gold shadow-md">
+          <i data-lucide="crown" class="w-4 h-4 text-royal-gold"></i> Anand Karaj: Sunday, Nov 1, 2026
+        </span>
+        <span class="hidden sm:inline text-royal-gold font-bold">&bull;</span>
+        <span class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-royal-gold shadow-md">
+          <i data-lucide="sparkles" class="w-4 h-4 text-royal-gold"></i> Grand Reception: Tuesday, Nov 3, 2026
+        </span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4" data-aos="zoom-in" data-aos-delay="400">
+        <a href="#rsvp" class="px-8 py-4 bg-royal-maroon hover:bg-royal-ruby text-royal-gold text-xs uppercase tracking-[0.25em] font-bold rounded-full shadow-2xl border border-royal-gold/60 transition-all duration-300 transform hover:-translate-y-1">
+          R.S.V.P &amp; Family Pass
+        </a>
+        <button onclick="addToCalendar()" class="px-7 py-4 border-2 border-royal-gold bg-white hover:bg-royal-gold hover:text-royal-maroon text-royal-maroon text-xs uppercase tracking-[0.25em] font-bold rounded-full transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 shadow-md">
+          <i data-lucide="calendar-plus" class="w-4 h-4 text-royal-gold"></i> Add To Calendar
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================== -->
+  <!-- 4. LIVE POPPING COUNTDOWN TIMER               -->
+  <!-- ============================================== -->
+  <section class="py-14 bg-gradient-to-r from-royal-maroon via-royal-deepWine to-royal-maroon text-white border-y-4 border-royal-gold shadow-2xl">
+    <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+      <div class="flex items-center justify-center gap-3 mb-2">
+        <span class="h-px w-10 bg-royal-gold"></span>
+        <p class="text-xs uppercase tracking-[0.35em] text-royal-gold font-bold">Counting Down to the Sacred Lavan</p>
+        <span class="h-px w-10 bg-royal-gold"></span>
+      </div>
+      <p class="font-serif italic text-sm text-royal-goldLight mb-8">Until Prince &amp; Preet tie the knot on November 1, 2026</p>
+      
+      <div class="grid grid-cols-4 gap-3 sm:gap-6 max-w-xl mx-auto">
+        <div class="p-5 bg-white/10 rounded-2xl border border-royal-gold/40 shadow-inner backdrop-blur-sm transform hover:-translate-y-2 transition-transform">
+          <span id="days" class="block font-cinzel text-3xl sm:text-5xl font-bold text-royal-goldLight">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-amber-200/80 font-bold mt-1 block">Days</span>
+        </div>
+        <div class="p-5 bg-white/10 rounded-2xl border border-royal-gold/40 shadow-inner backdrop-blur-sm transform hover:-translate-y-2 transition-transform">
+          <span id="hours" class="block font-cinzel text-3xl sm:text-5xl font-bold text-royal-goldLight">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-amber-200/80 font-bold mt-1 block">Hours</span>
+        </div>
+        <div class="p-5 bg-white/10 rounded-2xl border border-royal-gold/40 shadow-inner backdrop-blur-sm transform hover:-translate-y-2 transition-transform">
+          <span id="minutes" class="block font-cinzel text-3xl sm:text-5xl font-bold text-royal-goldLight">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-amber-200/80 font-bold mt-1 block">Mins</span>
+        </div>
+        <div class="p-5 bg-white/10 rounded-2xl border border-royal-gold/40 shadow-inner backdrop-blur-sm transform hover:-translate-y-2 transition-transform">
+          <span id="seconds" class="block font-cinzel text-3xl sm:text-5xl font-bold text-royal-goldLight">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-amber-200/80 font-bold mt-1 block">Secs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================== -->
+  <!-- 5. PUNJABI WEDDING RITUALS & CUSTOMS GUIDE     -->
+  <!-- ============================================== -->
+  <section id="rituals" class="py-24 max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+      <span class="text-xs uppercase tracking-[0.3em] text-royal-goldDark font-bold">Rivaaj &amp; Rasam</span>
+      <h2 class="font-cinzel text-4xl sm:text-5xl text-royal-maroon mt-2 font-bold">Punjabi Traditions</h2>
+      <div class="w-20 h-1 bg-royal-gold mx-auto mt-4 rounded-full"></div>
+      <p class="font-serif italic text-gray-600 text-base mt-3">The joyous cultural customs that make our celebration unforgettable</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Ritual 1: Sehra Bandi -->
+      <div class="royal-card p-8 rounded-3xl relative text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="w-16 h-16 mx-auto rounded-full bg-amber-100 border-2 border-royal-gold text-3xl flex items-center justify-center mb-4 shadow">👑</div>
+        <h3 class="font-cinzel text-xl text-royal-maroon font-bold mb-1">Sehra Bandi</h3>
+        <p class="text-[11px] uppercase tracking-wider text-royal-goldDark font-semibold mb-3">Groom's Blessing &amp; Crown</p>
+        <p class="text-xs text-gray-600 font-serif leading-relaxed">
+          The auspicious tying of the royal floral and pearl Sehra around the groom's turban by his sisters and family elders, blessing him with dignity, pride, and grace.
+        </p>
+      </div>
+
+      <!-- Ritual 2: Baraat & Milni -->
+      <div class="royal-card p-8 rounded-3xl relative text-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="w-16 h-16 mx-auto rounded-full bg-amber-100 border-2 border-royal-gold text-3xl flex items-center justify-center mb-4 shadow">🐎</div>
+        <h3 class="font-cinzel text-xl text-royal-maroon font-bold mb-1">Baraat &amp; Milni</h3>
+        <p class="text-[11px] uppercase tracking-wider text-royal-goldDark font-semibold mb-3">Royal Procession &amp; Embrace</p>
+        <p class="text-xs text-gray-600 font-serif leading-relaxed">
+          The groom arrives in a grand royal procession with dhol and celebration, met at the entrance by the warm ceremonial Milni garland embrace uniting corresponding family heads.
+        </p>
+      </div>
+
+      <!-- Ritual 3: Anand Karaj -->
+      <div class="royal-card p-8 rounded-3xl relative text-center border-2 border-royal-gold" data-aos="fade-up" data-aos-delay="300">
+        <div class="w-16 h-16 mx-auto rounded-full bg-rose-100 border-2 border-royal-gold text-3xl flex items-center justify-center mb-4 shadow">☬</div>
+        <h3 class="font-cinzel text-xl text-royal-maroon font-bold mb-1">Anand Karaj</h3>
+        <p class="text-[11px] uppercase tracking-wider text-royal-goldDark font-semibold mb-3">The Four Sacred Lavan</p>
+        <p class="text-xs text-gray-600 font-serif leading-relaxed">
+          The blissful sacred union circumambulating the Guru Granth Sahib Ji through four hymns of spiritual love, binding the bride and groom as one soul in two bodies.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+
+
+
+  <!-- ============================================== -->
+  <!-- 7. PUNJABI WEDDING EVENTS TIMELINE            -->
+  <!-- ============================================== -->
+  <section id="events" class="py-24 maroon-pattern text-white border-y-4 border-royal-gold">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-xs uppercase tracking-[0.35em] text-royal-gold font-bold">The Royal Celebrations</span>
+        <h2 class="font-cinzel text-4xl sm:text-5xl text-royal-goldLight mt-2 font-bold">Wedding Itinerary</h2>
+        <p class="text-amber-100/80 font-serif italic text-base mt-2">Dhol, dhamaka, sacred vows, and unforgettable royal feasts</p>
+      </div>
+
+      <!-- Timeline Wrapper -->
+      <div class="relative border-l-2 border-royal-gold/60 ml-4 md:ml-28 space-y-12 pb-4">
+        
+        <!-- Event 1: Satsang -->
+        <div class="relative pl-8 md:pl-12" data-aos="fade-left" data-aos-duration="800">
+          <div class="absolute -left-[11px] top-3 w-5 h-5 rounded-full bg-royal-gold border-4 border-royal-maroon shadow-md"></div>
+          
+          <div class="bg-white/95 text-gray-800 p-6 sm:p-8 rounded-3xl border border-royal-gold/60 shadow-xl backdrop-blur-md">
+            <span class="text-xs font-bold text-royal-saffron uppercase tracking-widest block mb-1">Friday, Oct 30, 2026 &bull; 11:00 AM</span>
+            <h3 class="font-cinzel text-2xl sm:text-3xl text-royal-maroon font-bold">Auspicious Satsang</h3>
+            <p class="text-sm text-gray-600 font-serif mt-2">Commencing our wedding celebrations with divine blessings, sacred hymns, spiritual kirtan, and guru's grace for the couple.</p>
+            <div class="mt-3 text-xs text-gray-700 font-semibold flex items-center gap-2">
+              <i data-lucide="home" class="w-4 h-4 text-royal-maroon"></i>
+              <span>Venue: At Home</span>
+            </div>
+            <div class="mt-4">
+              <span class="inline-block px-4 py-1.5 rounded-full bg-amber-50 border border-royal-gold/40 text-royal-maroon text-xs font-bold">
+                Dress Code: Elegant Traditional &bull; Whites, Creams &amp; Pastels
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 2: Haldi Utsav -->
+        <div class="relative pl-8 md:pl-12" data-aos="fade-left" data-aos-duration="800" data-aos-delay="100">
+          <div class="absolute -left-[11px] top-3 w-5 h-5 rounded-full bg-royal-gold border-4 border-royal-maroon shadow-md"></div>
+          
+          <div class="bg-white/95 text-gray-800 p-6 sm:p-8 rounded-3xl border border-royal-gold/60 shadow-xl backdrop-blur-md">
+            <span class="text-xs font-bold text-royal-saffron uppercase tracking-widest block mb-1">Saturday, Oct 31, 2026 &bull; 11:00 AM</span>
+            <h3 class="font-cinzel text-2xl sm:text-3xl text-royal-maroon font-bold">Haldi Utsav</h3>
+            <p class="text-sm text-gray-600 font-serif mt-2">Radiant turmeric paste blessings, rose petal showers, and playful traditions surrounded by family laughter and love.</p>
+            <div class="mt-3 text-xs text-gray-700 font-semibold flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-royal-maroon"></i>
+              <span>Venue: RK Regency, Near Verka Milk Plant</span>
+            </div>
+            <div class="mt-4">
+              <span class="inline-block px-4 py-1.5 rounded-full bg-purple-50 border border-purple-300 text-royal-maroon text-xs font-bold">
+                Dress Code: Pink &amp; Purple Shades
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 3: Jaggo Night & DJ -->
+        <div class="relative pl-8 md:pl-12" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+          <div class="absolute -left-[11px] top-3 w-5 h-5 rounded-full bg-royal-gold border-4 border-royal-maroon shadow-md"></div>
+          
+          <div class="bg-white/95 text-gray-800 p-6 sm:p-8 rounded-3xl border border-royal-gold/60 shadow-xl backdrop-blur-md">
+            <span class="text-xs font-bold text-royal-saffron uppercase tracking-widest block mb-1">Saturday, Oct 31, 2026 &bull; 8:30 PM Onwards</span>
+            <h3 class="font-cinzel text-2xl sm:text-3xl text-royal-maroon font-bold">Jaggo Night &amp; DJ</h3>
+            <p class="text-sm text-gray-600 font-serif mt-2">Carrying the gleaming traditional Jaggo vessels, spirited Boliyan, vibrant bhangra celebrations, and an energetic DJ party into the night.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="inline-block px-4 py-1.5 rounded-full bg-amber-50 border border-royal-gold/40 text-royal-maroon text-xs font-bold">
+                Dress Code for Boys: Kurta Pajama with Phulkari
+              </span>
+              <span class="inline-block px-4 py-1.5 rounded-full bg-rose-50 border border-royal-gold/40 text-royal-maroon text-xs font-bold">
+                Dress Code: Traditional Punjabi Glam &amp; Phulkari
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 4: Mehendi -->
+        <div class="relative pl-8 md:pl-12" data-aos="fade-left" data-aos-duration="800" data-aos-delay="250">
+          <div class="absolute -left-[11px] top-3 w-5 h-5 rounded-full bg-royal-gold border-4 border-royal-maroon shadow-md"></div>
+          
+          <div class="bg-white/95 text-gray-800 p-6 sm:p-8 rounded-3xl border border-royal-gold/60 shadow-xl backdrop-blur-md">
+            <span class="text-xs font-bold text-royal-saffron uppercase tracking-widest block mb-1">Saturday, Oct 31, 2026 &bull; 8:30 PM</span>
+            <h3 class="font-cinzel text-2xl sm:text-3xl text-royal-maroon font-bold">Mehendi Ceremony</h3>
+            <p class="text-sm text-gray-600 font-serif mt-2">Intricate bridal henna artistry, festive music, traditional treats, and vibrant celebrations with close ones.</p>
+            <div class="mt-3 text-xs text-gray-700 font-semibold flex items-center gap-2">
+              <i data-lucide="home" class="w-4 h-4 text-royal-maroon"></i>
+              <span>Venue: At Home</span>
+            </div>
+            <div class="mt-4">
+              <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-royal-maroon text-xs font-bold">
+                Dress Code: Festive Ethnic &amp; Jewel Tones
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 5: WEDDING DAY - ANAND KARAJ (NOV 1) -->
+        <div class="relative pl-8 md:pl-12" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300">
+          <div class="absolute -left-[13px] top-3 w-6 h-6 rounded-full bg-royal-gold border-4 border-white shadow-xl animate-ping"></div>
+          <div class="absolute -left-[13px] top-3 w-6 h-6 rounded-full bg-royal-gold border-4 border-white shadow-xl"></div>
+          
+          <div class="bg-gradient-to-br from-[#FFFDF9] to-[#FFF7E8] text-gray-900 p-7 sm:p-9 rounded-3xl border-4 border-royal-gold shadow-2xl relative">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-royal-maroon text-royal-gold text-[10px] font-bold uppercase tracking-widest mb-3">
+              <span>☬</span> The Wedding Day &bull; Auspicious Anand Karaj
+            </div>
+            <span class="text-xs font-bold text-royal-saffron uppercase tracking-widest block mb-1">Sunday, Nov 1, 2026 &bull; 9:30 AM Onwards</span>
+            <h3 class="font-cinzel text-2xl sm:text-3xl text-royal-maroon font-black">Baraat, Milni &amp; Anand Karaj</h3>
+            <div class="mt-2 text-sm text-gray-700 font-serif space-y-1">
+              <p><strong>09:30 AM:</strong> Royal Sehra Bandi &amp; Baraat Swagat (Horse Procession with Dhol)</p>
+              <p><strong>10:15 AM:</strong> Ceremonial Milni &amp; Anand Karaj (Four Sacred Lavan)</p>
+              <p><strong>01:00 PM:</strong> Guru Ka Langar &amp; Royal Luncheon</p>
+            </div>
+            <div class="mt-4 p-3 rounded-2xl bg-amber-50/80 border border-royal-gold/40 text-xs text-gray-800 flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-royal-maroon shrink-0 mt-0.5"></i>
+              <div>
+                <strong class="text-royal-maroon font-bold block">Wedding Venue:</strong>
+                <span>Rockland Resort, Opp. KFC, Dinanagar</span>
+              </div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="inline-block px-4 py-1.5 rounded-full bg-rose-50 border border-royal-maroon/30 text-royal-maroon text-xs font-bold">
+                Dress Code for Baraat: Indo-Western
+              </span>
+              <span class="inline-block px-4 py-1.5 rounded-full bg-amber-50 border border-royal-gold/40 text-royal-maroon text-xs font-bold">
+                Head Covering Mandatory for Anand Karaj
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 6: RECEPTION GALA (NOV 3) -->
+        <div class="relative pl-8 md:pl-12" data-aos="fade-left" data-aos-duration="800" data-aos-delay="350">
+          <div class="absolute -left-[11px] top-3 w-5 h-5 rounded-full bg-royal-gold border-4 border-royal-maroon shadow-md"></div>
+          
+          <div class="bg-gradient-to-br from-[#FFFDF9] to-[#FFF7E8] text-gray-900 p-7 sm:p-9 rounded-3xl border-2 border-royal-gold shadow-2xl relative">
+            <div class="inline-block px-3.5 py-1 rounded-full bg-royal-maroon text-royal-gold text-[10px] font-bold uppercase tracking-widest mb-3">
+              The Grand Reception Gala
+            </div>
+            <span class="text-xs font-bold text-royal-saffron uppercase tracking-widest block mb-1">Tuesday, Nov 3, 2026 &bull; 7:30 PM</span>
+            <h3 class="font-cinzel text-2xl sm:text-3xl text-royal-maroon font-black">Grand Shahi Dawat &amp; Reception</h3>
+            <p class="text-sm text-gray-700 font-serif mt-2">A majestic evening of congratulations, royal feast with live Punjabi delicacies, celebrations, and togetherness.</p>
+            <div class="mt-4 p-3 rounded-2xl bg-amber-50/80 border border-royal-gold/40 text-xs text-gray-800 flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-royal-maroon shrink-0 mt-0.5"></i>
+              <div>
+                <strong class="text-royal-maroon font-bold block">Reception Venue:</strong>
+                <span>Prince Resort, Kalanaur Road, Gurdaspur</span>
+              </div>
+            </div>
+            <div class="mt-4">
+              <span class="inline-block px-4 py-1.5 rounded-full bg-slate-100 border border-slate-300 text-royal-maroon text-xs font-bold">
+                Dress Code for Reception: Pent Coat (Suit / Tuxedo)
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================== -->
+  <!-- 8. VENUE DETAILS & DESTINATIONS                -->
+  <!-- ============================================== -->
+  <section id="venue" class="py-24 max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+      <span class="text-xs uppercase tracking-[0.3em] text-royal-goldDark font-bold">Sacred Destinations</span>
+      <h2 class="font-cinzel text-4xl sm:text-5xl text-royal-maroon mt-2 font-bold">Wedding Venues</h2>
+      <div class="w-20 h-1 bg-royal-gold mx-auto mt-4 rounded-full"></div>
+      <p class="font-serif italic text-gray-600 text-base mt-3">Locations where our celebrations and sacred moments unfold</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Venue Card 1: Wedding Day -->
+      <div class="royal-card p-8 rounded-3xl relative border-2 border-royal-gold/60 shadow-xl" data-aos="fade-up" data-aos-delay="100">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-royal-maroon text-royal-gold text-[10px] font-bold uppercase tracking-widest mb-4">
+          <span>☬</span> Wedding Day Venue &bull; Nov 1, 2026
+        </div>
+        <h3 class="font-cinzel text-2xl sm:text-3xl text-royal-maroon font-bold mb-3">Rockland Resort</h3>
+        <p class="font-serif text-gray-700 text-sm leading-relaxed mb-6">
+          The regal venue for our sacred Anand Karaj, Baraat reception, and ceremonial feast.
+        </p>
+
+        <div class="space-y-3 mb-6 text-sm text-gray-700">
+          <div class="flex items-start gap-3">
+            <i data-lucide="map-pin" class="w-5 h-5 text-royal-maroon shrink-0 mt-0.5"></i>
+            <span>Opposite KFC, Dinanagar, Punjab</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <i data-lucide="clock" class="w-5 h-5 text-royal-maroon shrink-0 mt-0.5"></i>
+            <span>9:30 AM Onwards &bull; Sehra Bandi, Baraat Swagat &amp; Anand Karaj</span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://maps.google.com/?q=Rockland+Resort+Dinanagar" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-royal-maroon hover:bg-royal-ruby text-royal-gold text-xs uppercase tracking-[0.2em] font-bold rounded-full shadow-lg flex items-center gap-2 transition-all transform hover:-translate-y-1 border border-royal-gold/40">
+            <i data-lucide="navigation" class="w-4 h-4"></i> Get Directions
+          </a>
+        </div>
+      </div>
+
+      <!-- Venue Card 2: Reception Gala -->
+      <div class="royal-card p-8 rounded-3xl relative border-2 border-royal-gold/60 shadow-xl" data-aos="fade-up" data-aos-delay="200">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-royal-maroon text-royal-gold text-[10px] font-bold uppercase tracking-widest mb-4">
+          The Grand Reception &bull; Nov 3, 2026
+        </div>
+        <h3 class="font-cinzel text-2xl sm:text-3xl text-royal-maroon font-bold mb-3">Prince Resort</h3>
+        <p class="font-serif text-gray-700 text-sm leading-relaxed mb-6">
+          The grand celebratory banquet hall for an evening of joyous greetings, music, and royal feast.
+        </p>
+
+        <div class="space-y-3 mb-6 text-sm text-gray-700">
+          <div class="flex items-start gap-3">
+            <i data-lucide="map-pin" class="w-5 h-5 text-royal-maroon shrink-0 mt-0.5"></i>
+            <span>Kalanaur Road, Gurdaspur, Punjab</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <i data-lucide="clock" class="w-5 h-5 text-royal-maroon shrink-0 mt-0.5"></i>
+            <span>7:30 PM Onwards &bull; Grand Shahi Dawat</span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://maps.google.com/?q=Prince+Resort+Kalanaur+Road+Gurdaspur" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-royal-maroon hover:bg-royal-ruby text-royal-gold text-xs uppercase tracking-[0.2em] font-bold rounded-full shadow-lg flex items-center gap-2 transition-all transform hover:-translate-y-1 border border-royal-gold/40">
+            <i data-lucide="navigation" class="w-4 h-4"></i> Get Directions
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================== -->
+  <!-- 9. PHOTO GALLERY (ROYAL VOWS & MOMENTS)        -->
+  <!-- ============================================== -->
+  <section id="gallery" class="py-24 bg-royal-warmSand/40 border-t-2 border-royal-gold/30">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-xs uppercase tracking-[0.3em] text-royal-goldDark font-bold">Yaadan &bull; Memories</span>
+        <h2 class="font-cinzel text-4xl sm:text-5xl text-royal-maroon mt-2 font-bold">Captured Moments</h2>
+        <div class="w-16 h-1 bg-royal-gold mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="group relative overflow-hidden rounded-3xl shadow-xl aspect-[4/5] border-2 border-royal-gold/40" data-aos="zoom-in" data-aos-delay="100">
+          <img src="images/couple_portrait.jpg" alt="Prince &amp; Preet Royal Portrait" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+            <span class="font-serif text-amber-200 italic text-xl drop-shadow">"Jodi Rab Ne Banayi &bull; Bound for Eternity"</span>
+          </div>
+        </div>
+        <div class="group relative overflow-hidden rounded-3xl shadow-xl aspect-[4/5] border-2 border-royal-gold/40" data-aos="zoom-in" data-aos-delay="200">
+          <img src="images/couple_moment.jpg" alt="Prince &amp; Preet Wedding Moment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+            <span class="font-serif text-amber-200 italic text-xl drop-shadow">"Sacred Vows of Anand Karaj"</span>
+          </div>
+        </div>
+        <div class="group relative overflow-hidden rounded-3xl shadow-xl aspect-[4/5] border-2 border-royal-gold/40" data-aos="zoom-in" data-aos-delay="300">
+          <img src="images/couple_landscape.jpg" alt="Prince &amp; Preet Together" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+            <span class="font-serif text-amber-200 italic text-xl drop-shadow">"Golden Moments &bull; Forever &amp; Always"</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================== -->
+  <!-- 9.5 LIVE WEDDING SOCIAL PHOTO FEED (FIREBASE)  -->
+  <!-- ============================================== -->
+  <section id="live-feed" class="py-24 bg-gradient-to-b from-royal-warmSand/60 to-royal-cream border-t-4 border-royal-gold/40 relative">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
+        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-royal-ruby text-white text-[11px] uppercase font-bold tracking-widest mb-3 shadow-md">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Guest Social Wall
+        </div>
+        <h2 class="font-cinzel text-4xl sm:text-5xl text-royal-maroon font-bold">Snap, Share &amp; Celebrate</h2>
+        <p class="font-serif italic text-gray-700 text-base mt-2">Captured an unforgettable moment from the Jaggo, Anand Karaj, or Reception? Share it with Prince &amp; Preet!</p>
+        <div class="w-20 h-1 bg-royal-gold mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- Upload Bar Card (Dynamic according to Auth Status) -->
+      <div class="royal-card p-6 sm:p-8 rounded-3xl max-w-3xl mx-auto mb-16 border-2 border-royal-gold shadow-xl" data-aos="zoom-in">
+        
+        <!-- State A: Not Logged In -->
+        <div id="feedAuthLocked" class="text-center py-6">
+          <div class="w-16 h-16 rounded-full bg-royal-gold/20 text-royal-maroon flex items-center justify-center mx-auto mb-4 border border-royal-gold">
+            <i data-lucide="lock" class="w-8 h-8 text-royal-maroon"></i>
+          </div>
+          <h3 class="font-cinzel text-2xl text-royal-maroon font-bold mb-2">Guest Verification Required</h3>
+          <p class="text-sm text-gray-600 font-serif max-w-md mx-auto mb-6">
+            To maintain privacy and a family-friendly atmosphere, please log in with your Name and Mobile Number to post photos and likes.
+          </p>
+          <button onclick="openLoginModal()" class="px-8 py-3.5 bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold text-xs uppercase tracking-[0.25em] font-bold rounded-full shadow-lg border border-royal-gold/60 transition-all transform hover:-translate-y-0.5 flex items-center gap-2 mx-auto">
+            <i data-lucide="smartphone" class="w-4 h-4"></i> Login with Mobile No. &amp; Name
+          </button>
+        </div>
+
+        <!-- State B: Logged In & Ready to Post -->
+        <div id="feedUploadBox" class="hidden">
+          <div class="flex items-center justify-between pb-4 border-b border-royal-gold/30 mb-5">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-royal-maroon text-royal-gold font-bold flex items-center justify-center text-sm shadow" id="feedUserAvatar">P</div>
+              <div>
+                <p class="text-sm font-bold text-royal-maroon" id="feedUserName">Gurpreet Singh</p>
+                <p class="text-[11px] text-gray-500 flex items-center gap-1 font-medium"><i data-lucide="phone" class="w-3 h-3 text-royal-gold"></i> <span id="feedUserPhone">+91 98765 43210</span></p>
+              </div>
+            </div>
+            <button onclick="guestSignOut()" class="text-xs text-royal-ruby font-bold hover:underline flex items-center gap-1">
+              <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Logout
+            </button>
+          </div>
+
+          <form id="postPhotoForm" onsubmit="handlePostPhoto(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1.5">Caption or Love Note</label>
+              <input type="text" id="photoCaption" required placeholder="e.g. Sangeet beats on fire! Prince & Preet looking stunning! 🔥" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none text-sm bg-white">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1.5">Select Event Category</label>
+                <select id="photoTag" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none text-sm bg-white font-medium text-gray-700">
+                  <option value="Mehendi & Haldi">🌸 Mehendi &amp; Haldi</option>
+                  <option value="Sangeet & Jaggo">🪔 Sangeet &amp; Shahi Jaggo</option>
+                  <option value="Anand Karaj (Wedding)">☬ Anand Karaj (Wedding)</option>
+                  <option value="Grand Reception">✨ Grand Reception Gala</option>
+                  <option value="Candid & Family Moments">📸 Candid &amp; Family Moments</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1.5">Choose Photo *</label>
+                <input type="file" id="photoFileInput" accept="image/*" required onchange="previewUploadImage(event)" class="w-full text-xs text-gray-500 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-royal-maroon file:text-royal-gold hover:file:bg-royal-ruby cursor-pointer border border-gray-300 rounded-xl p-1 bg-white">
+              </div>
+            </div>
+
+            <!-- Image preview box -->
+            <div id="imagePreviewContainer" class="hidden relative rounded-2xl overflow-hidden max-h-56 border-2 border-royal-gold/40 shadow-inner">
+              <img id="imagePreview" src="" alt="Upload Preview" class="w-full h-full object-cover">
+              <button type="button" onclick="clearImagePreview()" class="absolute top-2 right-2 p-1.5 rounded-full bg-black/70 text-white hover:bg-black">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <button type="submit" id="submitPostBtn" class="w-full py-3.5 bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-lg border border-royal-gold/60 transition-all flex items-center justify-center gap-2">
+              <i data-lucide="upload-cloud" class="w-4 h-4"></i> Post to Wedding Wall
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Filter Categories -->
+      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+        <button onclick="filterPhotos('all')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-royal-maroon text-royal-gold border border-royal-gold active-filter" data-filter="all">All Photos</button>
+        <button onclick="filterPhotos('Mehendi & Haldi')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-white text-royal-maroon border border-royal-gold/40 hover:border-royal-gold" data-filter="Mehendi & Haldi">🌸 Mehendi</button>
+        <button onclick="filterPhotos('Sangeet & Jaggo')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-white text-royal-maroon border border-royal-gold/40 hover:border-royal-gold" data-filter="Sangeet & Jaggo">🪔 Jaggo / Sangeet</button>
+        <button onclick="filterPhotos('Anand Karaj (Wedding)')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-white text-royal-maroon border border-royal-gold/40 hover:border-royal-gold" data-filter="Anand Karaj (Wedding)">☬ Anand Karaj</button>
+        <button onclick="filterPhotos('Grand Reception')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-white text-royal-maroon border border-royal-gold/40 hover:border-royal-gold" data-filter="Grand Reception">✨ Reception</button>
+      </div>
+
+      <!-- Live Photo Social Grid -->
+      <div id="socialFeedGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <!-- Rendered dynamically via JavaScript & Firebase -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================== -->
+  <!-- FIREBASE MOBILE LOGIN MODAL                    -->
+  <!-- ============================================== -->
+  <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md transition-all duration-300 p-4 hidden">
+    <div class="royal-card w-full max-w-md p-8 sm:p-10 rounded-3xl border-4 border-royal-gold shadow-2xl relative">
+      <button onclick="closeLoginModal()" class="absolute top-5 right-5 text-gray-400 hover:text-royal-maroon transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
       </button>
 
-      <div class="gift-subtag">
-        <i class="fas fa-heart text-pink"></i> Prince Karlupia's Birthday Box
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT CONTAINER -->
-  <main id="main-content" class="main-content hidden">
-
-    <!-- FLOATING DECORATIONS -->
-    <div class="floating-balloons">
-      <div class="balloon balloon-1">🎈</div>
-      <div class="balloon balloon-2">🎈</div>
-      <div class="balloon balloon-3">🎈</div>
-      <div class="balloon balloon-4">🎈</div>
-      <div class="balloon balloon-5">🎈</div>
-    </div>
-
-    <!-- HERO SECTION -->
-    <section class="hero-section">
-      <div class="hero-badge">
-        <i class="fas fa-crown text-gold"></i> Happy Birthday Prince Karlupia! <i class="fas fa-sparkles text-gold"></i>
-      </div>
-
-      <!-- TOP FEATURED HERO IMAGE FRAME FOR PRINCE KARLUPIA -->
-      <div class="hero-photo-wrapper">
-        <div class="crown-decoration">👑</div>
-        <div class="hero-photo-frame">
-          <img src="8.jpeg" alt="Prince Karlupia" id="hero-img" onerror="this.src='8.jpg'">
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 rounded-full bg-royal-maroon text-royal-gold flex items-center justify-center mx-auto mb-3 border-2 border-royal-gold text-xl">
+          ☬
         </div>
-        <div class="hero-sparkle-stars">
-          <span class="star-s1">✨</span>
-          <span class="star-s2">💖</span>
-          <span class="star-s3">⭐</span>
+        <h3 class="font-cinzel text-2xl text-royal-maroon font-bold">Guest Portal Login</h3>
+        <p class="text-xs text-gray-500 font-serif mt-1">Enter your details to share photos &amp; blessings</p>
+      </div>
+
+      <!-- Step 1: Name & Mobile Number -->
+      <div id="phoneInputStep" class="space-y-4">
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1">Your Full Name *</label>
+          <input type="text" id="loginGuestName" required placeholder="e.g. Jasleen Kaur" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none text-sm bg-white">
         </div>
-      </div>
 
-      <h1 class="hero-title">Happy Birthday Prince Karlupia! <span class="heart-pulse">💖</span></h1>
-      <p class="hero-subtitle">Wishing Prince Karlupia a day filled with endless laughter, sweet moments, and all the joy in the world!</p>
-      
-      <div class="banner-ribbon">
-        <span class="star-badge">⭐</span>
-        <span>Celebrating Prince Karlupia's Special Day!</span>
-        <span class="star-badge">⭐</span>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE CAKE SECTION -->
-    <section class="cake-section" id="cake-section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-birthday-cake"></i> Make a Wish, Prince!</h2>
-        <p class="section-desc">Click or tap the candles to blow them out!</p>
-      </div>
-
-      <div class="cake-wrapper">
-        <div class="cake-glow"></div>
-        <!-- Animated Birthday Cake -->
-        <div class="cake">
-          <div class="plate"></div>
-          <div class="layer layer-bottom">
-            <div class="icing"></div>
-            <div class="sprinkles"><span></span><span></span><span></span><span></span><span></span></div>
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1">Mobile Number (with Country Code) *</label>
+          <div class="flex gap-2">
+            <input type="tel" id="loginGuestPhone" required placeholder="+91 98765 43210" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none text-sm bg-white font-medium">
           </div>
-          <div class="layer layer-middle">
-            <div class="icing"></div>
-            <div class="sprinkles"><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="layer layer-top">
-            <div class="icing"></div>
-            <div class="sprinkles"><span></span><span></span><span></span></div>
-          </div>
-          
-          <!-- Candles -->
-          <div class="candles-container">
-            <div class="candle candle-1" data-candle="1">
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-            <div class="candle candle-2" data-candle="2">
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-            <div class="candle candle-3" data-candle="3">
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-          </div>
+          <p class="text-[10px] text-gray-400 mt-1">E.g., +91 for India, +1 for US/Canada, +44 for UK</p>
         </div>
-      </div>
 
-      <div class="blow-action-container">
-        <button id="blow-candles-btn" class="cute-btn primary-btn">
-          <i class="fas fa-wind"></i> Blow Out All Candles!
+        <!-- Firebase reCAPTCHA Invisible/Visible container -->
+        <div id="recaptcha-container" class="my-3 flex justify-center"></div>
+
+        <button onclick="sendOtpCode()" id="sendOtpBtn" class="w-full py-3.5 bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-lg border border-royal-gold/60 transition-all flex items-center justify-center gap-2">
+          <span>Send Verification OTP</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <!-- Wish Unlocked Banner -->
-      <div id="wish-unlocked-card" class="wish-card hidden-wish">
-        <div class="wish-card-inner">
-          <i class="fas fa-magic magic-icon"></i>
-          <h3>Prince's Wish Granted! 🎉✨</h3>
-          <p>May your year ahead be brighter than all the stars in the night sky. Stay happy, blessed, and always smiling, Prince Karlupia!</p>
-          <button id="rekindle-btn" class="cute-btn mini-btn">Light Candles Again 🕯️</button>
+      <!-- Step 2: 6-Digit OTP Verification -->
+      <div id="otpInputStep" class="space-y-4 hidden">
+        <div class="text-center py-2">
+          <p class="text-xs text-gray-600">OTP code sent to <strong id="displaySentPhone" class="text-royal-maroon">+91 ...</strong></p>
         </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1 text-center">Enter 6-Digit OTP</label>
+          <input type="text" id="loginOtpCode" maxlength="6" placeholder="1 2 3 4 5 6" class="w-full text-center tracking-[0.5em] text-2xl font-bold px-4 py-3 rounded-xl border-2 border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none bg-white">
+        </div>
+
+        <button onclick="verifyOtpCode()" id="verifyOtpBtn" class="w-full py-3.5 bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-lg border border-royal-gold/60 transition-all flex items-center justify-center gap-2">
+          <span>Verify &amp; Enter Social Wall</span>
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+        </button>
+
+        <button onclick="backToPhoneStep()" class="w-full text-center text-xs text-gray-500 hover:text-royal-maroon underline pt-2">
+          Change Phone Number
+        </button>
       </div>
-    </section>
 
-    <!-- MEMORY LANE - POLAROID GALLERY -->
-    <section class="gallery-section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-camera-retro"></i> Prince's Memory Lane</h2>
-        <p class="section-desc">A collection of sweet memories and beautiful smiles 💕</p>
-      </div>
+    </div>
+  </div>
 
-      <div class="polaroid-grid">
-        
-        <!-- Polaroid Featured Top Item 8 -->
-        <div class="polaroid-card featured-polaroid" data-img="8.jpeg" data-caption="Birthday Prince 👑" data-sub="The star of the day, Prince Karlupia!">
-          <div class="pin">👑</div>
-          <div class="polaroid-img-wrapper">
-            <img src="8.jpeg" alt="Prince Karlupia Birthday 8" loading="lazy" onerror="this.src='8.jpg'">
-          </div>
-          <div class="polaroid-caption">
-            <span>Birthday Prince 👑</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
-          </div>
+
+  <!-- ============================================== -->
+  <!-- 10. SMART RSVP & PUNJABI DIGITAL GUEST PASS    -->
+  <!-- ============================================== -->
+  <section id="rsvp" class="py-24 max-w-4xl mx-auto px-6">
+    <div class="royal-card rounded-3xl p-8 sm:p-14 border-4 border-royal-gold shadow-2xl relative overflow-hidden" data-aos="fade-up">
+      
+      <div class="relative z-10">
+        <div class="text-center max-w-lg mx-auto mb-10">
+          <span class="font-gurmukhi text-royal-goldDark text-base font-bold">ਸਵਾਗਤਮ &bull; Shahi Nimantran</span>
+          <h2 class="font-cinzel text-4xl sm:text-5xl text-royal-maroon mt-1 font-bold">RSVP &amp; Shahi Pass</h2>
+          <p class="text-gray-600 font-serif italic text-base mt-2">Kindly confirm your presence by October 15, 2026</p>
         </div>
 
-        <!-- Polaroid Item 7 -->
-        <div class="polaroid-card" data-img="7.jpeg" data-caption="Glowing Joy ✨" data-sub="Spreading warmth and happy smiles everywhere!">
-          <div class="pin">⭐</div>
-          <div class="polaroid-img-wrapper">
-            <img src="7.jpeg" alt="Birthday Memory 7" loading="lazy">
+        <!-- RSVP Form -->
+        <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)" class="space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-2 font-bold">Your Full Name *</label>
+              <input type="text" id="guestName" required placeholder="Guest / Family Name" class="w-full px-5 py-3.5 rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white">
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-2 font-bold">Email Address *</label>
+              <input type="email" id="guestEmail" required placeholder="guest@example.com" class="w-full px-5 py-3.5 rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white">
+            </div>
           </div>
-          <div class="polaroid-caption">
-            <span>Glowing Joy ✨</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
 
-        <!-- Polaroid Item 1 -->
-        <div class="polaroid-card" data-img="1.jpeg" data-caption="Sweetest Smiles 🌸" data-sub="Every moment with you is a joy to remember!">
-          <div class="pin">📌</div>
-          <div class="polaroid-img-wrapper">
-            <img src="1.jpeg" alt="Birthday Memory 1" loading="lazy">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-2 font-bold">Will your family join us? *</label>
+              <select id="attendance" required class="w-full px-5 py-3.5 rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white">
+                <option value="Joyfully Attending">Joyfully Attending (ਹਾਂਜੀ, ਜਰੂਰ ਆਵਾਂਗੇ)</option>
+                <option value="Regretfully Declining">Regretfully Declining</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-2 font-bold">Number of Guests</label>
+              <select id="guestCount" class="w-full px-5 py-3.5 rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white">
+                <option value="1 Guest">1 (Attending solo)</option>
+                <option value="2 Guests">2 (With Plus One / Spouse)</option>
+                <option value="Family (3-4)">Family (3-4 Members)</option>
+                <option value="Large Family (5+)">Large Family (5+ Members)</option>
+              </select>
+            </div>
           </div>
-          <div class="polaroid-caption">
-            <span>Sweetest Smiles 🌸</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
 
-        <!-- Polaroid Item 2 -->
-        <div class="polaroid-card" data-img="2.jpeg" data-caption="Golden Happiness ☀️" data-sub="Brighter than sunshine, always bringing good vibes!">
-          <div class="pin">📎</div>
-          <div class="polaroid-img-wrapper">
-            <img src="2.jpeg" alt="Birthday Memory 2" loading="lazy">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-2 font-bold">Langar &amp; Banquet Dietary</label>
+            <select id="dietary" class="w-full px-5 py-3.5 rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white">
+              <option value="Shahi Vegetarian Gourmet">Shahi Vegetarian Gourmet</option>
+              <option value="Jain Friendly">Jain Friendly</option>
+              <option value="Non-Vegetarian Punjabi">Non-Vegetarian Punjabi Delicacies</option>
+              <option value="Vegan / Nut-Free">Vegan / Nut-Free</option>
+            </select>
           </div>
-          <div class="polaroid-caption">
-            <span>Golden Happiness ☀️</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
 
-        <!-- Polaroid Item 3 -->
-        <div class="polaroid-card" data-img="3.jpeg" data-caption="Pure Magic 💫" data-sub="Cherishing all the fun times and giggles!">
-          <div class="pin">✨</div>
-          <div class="polaroid-img-wrapper">
-            <img src="3.jpeg" alt="Birthday Memory 3" loading="lazy">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-2 font-bold">Ashirwad &amp; Blessing for Prince &amp; Preet</label>
+            <textarea id="guestWishes" rows="3" placeholder="Share your warm wishes, dua or hearty congratulations..." class="w-full px-5 py-3.5 rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white"></textarea>
           </div>
-          <div class="polaroid-caption">
-            <span>Pure Magic 💫</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
 
-        <!-- Polaroid Item 4 -->
-        <div class="polaroid-card" data-img="4.jpeg" data-caption="Unforgettable Moments 🌟" data-sub="Making memories that will last forever!">
-          <div class="pin">📌</div>
-          <div class="polaroid-img-wrapper">
-            <img src="4.jpeg" alt="Birthday Memory 4" loading="lazy">
-          </div>
-          <div class="polaroid-caption">
-            <span>Unforgettable Moments 🌟</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
+          <button type="submit" class="w-full py-4 bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold text-xs uppercase tracking-[0.25em] font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 border-2 border-royal-gold cursor-pointer">
+            <i data-lucide="send" class="w-4 h-4 text-royal-gold"></i> Submit RSVP &amp; Claim Shahi Pass
+          </button>
+        </form>
 
-        <!-- Polaroid Item 5 -->
-        <div class="polaroid-card" data-img="4.jpg" data-caption="Shining Bright 💖" data-sub="Your joy and energy light up every room!">
-          <div class="pin">🎀</div>
-          <div class="polaroid-img-wrapper">
-            <img src="4.jpg" alt="Birthday Memory 5" loading="lazy">
+        <!-- Dynamic Success & Shahi Digital Pass -->
+        <div id="rsvpSuccessCard" class="hidden mt-10 p-8 sm:p-10 bg-gradient-to-b from-[#FFFDF9] to-[#FAF3E0] rounded-3xl border-4 border-royal-gold shadow-2xl text-center">
+          <div class="w-16 h-16 bg-royal-maroon text-royal-gold rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-royal-gold animate-bounce">
+            <span class="text-2xl">☬</span>
           </div>
-          <div class="polaroid-caption">
-            <span>Shining Bright 💖</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
+          <h3 class="font-cinzel text-3xl sm:text-4xl text-royal-maroon font-bold">Lakh Lakh Vadhaiyan!</h3>
+          <p class="text-base text-gray-700 font-serif italic mt-1">Your RSVP has been confirmed. We look forward to welcoming you with dhol beats and warm celebrations!</p>
 
-        <!-- Polaroid Item 6 -->
-        <div class="polaroid-card" data-img="5.jpeg" data-caption="Joyful Vibes 🌼" data-sub="So many reasons to smile today and everyday!">
-          <div class="pin">📎</div>
-          <div class="polaroid-img-wrapper">
-            <img src="5.jpeg" alt="Birthday Memory 6" loading="lazy">
-          </div>
-          <div class="polaroid-caption">
-            <span>Joyful Vibes 🌼</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
-
-        <!-- Polaroid Item 6.2 -->
-        <div class="polaroid-card" data-img="6.jpeg" data-caption="Forever Special 👑" data-sub="Wishing Prince Karlupia the happiest birthday ever!">
-          <div class="pin">⭐</div>
-          <div class="polaroid-img-wrapper">
-            <img src="6.jpeg" alt="Birthday Memory 6.2" loading="lazy">
-          </div>
-          <div class="polaroid-caption">
-            <span>Forever Special 👑</span>
-            <button class="heart-btn" aria-label="Love this photo"><i class="far fa-heart"></i></button>
+          <!-- Digital Pass Preview -->
+          <div class="mt-8 max-w-sm mx-auto bg-white p-7 rounded-3xl border-4 border-royal-gold shadow-xl flex flex-col items-center">
+            <div class="inline-flex items-center gap-1.5 text-royal-maroon text-[10px] font-bold uppercase tracking-[0.25em] mb-1">
+              <span>☬</span> Official Shahi Vivah Pass <span>☬</span>
+            </div>
+            <h4 id="passGuestName" class="font-cinzel text-2xl text-royal-maroon font-bold mt-1">Prince Preet</h4>
+            <p id="passDetails" class="text-xs text-gray-600 mb-5 font-semibold">2 Guests &bull; Shahi Vegetarian Gourmet</p>
+            
+            <div id="qrcode" class="p-3 bg-white border-2 border-royal-gold/40 rounded-2xl mb-4 shadow-inner"></div>
+            <p class="text-[11px] text-gray-500 tracking-wider font-medium">Present this QR pass at the welcome desk for entry &amp; suite allocation.</p>
           </div>
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SECRET BIRTHDAY SURPRISE FLIP CARDS -->
-    <section class="wishes-section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-gift"></i> Secret Birthday Notes for Prince</h2>
-        <p class="section-desc">Tap each card to flip and reveal a special message!</p>
+
+  <!-- ============================================== -->
+  <!-- 11. WARM ASHIRWAD & GUEST WISHES FEED          -->
+  <!-- ============================================== -->
+  <section id="wishes" class="py-24 bg-royal-warmSand/30 border-t-2 border-royal-gold/30">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
+        <span class="text-xs uppercase tracking-[0.3em] text-royal-goldDark font-bold">Aashirwad &amp; Pyar</span>
+        <h2 class="font-cinzel text-3xl sm:text-4xl text-royal-maroon mt-1 font-bold">Blessings From Family &amp; Friends</h2>
       </div>
 
-      <div class="flip-cards-grid">
-        <!-- Flip Card 1 -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <i class="fas fa-star card-icon text-gold"></i>
-              <h3>Note #1</h3>
-              <p>Tap to reveal ✨</p>
-            </div>
-            <div class="flip-card-back">
-              <i class="fas fa-smile-beam card-icon text-pink"></i>
-              <h3>Keep Smiling Prince!</h3>
-              <p>Your smile is infectious and brightens up even the dullest days. Never stop smiling, Prince Karlupia!</p>
+      <div id="wishesContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Sample Initial Wishes -->
+        <div class="royal-card p-6 rounded-3xl relative" data-aos="fade-up" data-aos-delay="100">
+          <p class="font-serif italic text-gray-800 text-sm mb-4 leading-relaxed">"Waheguru Ji hamesha mehar karan! Wishing Prince and Preet eternal joy, boundless prosperity, and an Anand Karaj filled with divine bliss."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-royal-maroon text-royal-gold font-bold flex items-center justify-center text-xs border border-royal-gold">AK</div>
+            <div>
+              <p class="text-xs font-bold text-royal-maroon">Aman &amp; Kirat Dhillon</p>
+              <p class="text-[10px] text-gray-500">Vancouver, Canada</p>
             </div>
           </div>
         </div>
 
-        <!-- Flip Card 2 -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <i class="fas fa-heart card-icon text-pink"></i>
-              <h3>Note #2</h3>
-              <p>Tap to reveal 💕</p>
-            </div>
-            <div class="flip-card-back">
-              <i class="fas fa-sun card-icon text-gold"></i>
-              <h3>Shine Bright!</h3>
-              <p>You have a heart of gold and a spirit full of light. Reach high for all your dreams, Prince!</p>
+        <div class="royal-card p-6 rounded-3xl relative" data-aos="fade-up" data-aos-delay="200">
+          <p class="font-serif italic text-gray-800 text-sm mb-4 leading-relaxed">"Ready for the grandest Jaggo and DJ night! Bhangra paun nu tayyar ho jao sare! Huge congratulations!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-royal-maroon text-royal-gold font-bold flex items-center justify-center text-xs border border-royal-gold">RS</div>
+            <div>
+              <p class="text-xs font-bold text-royal-maroon">Harpreet &amp; Simran Bains</p>
+              <p class="text-[10px] text-gray-500">Chandigarh, India</p>
             </div>
           </div>
         </div>
 
-        <!-- Flip Card 3 -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <i class="fas fa-gem card-icon text-purple"></i>
-              <h3>Note #3</h3>
-              <p>Tap to reveal 💎</p>
+        <div class="royal-card p-6 rounded-3xl relative" data-aos="fade-up" data-aos-delay="300">
+          <p class="font-serif italic text-gray-800 text-sm mb-4 leading-relaxed">"May your married life be as vibrant as the phulkari and blessed with endless joy and prosperity. Heartiest congratulations both of you!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-royal-maroon text-royal-gold font-bold flex items-center justify-center text-xs border border-royal-gold">MJ</div>
+            <div>
+              <p class="text-xs font-bold text-royal-maroon">Manpreet Singh Johal</p>
+              <p class="text-[10px] text-gray-500">California, USA</p>
             </div>
-            <div class="flip-card-back">
-              <i class="fas fa-laugh-wink card-icon text-purple"></i>
-              <h3>Endless Joy!</h3>
-              <p>May this new year of your life be filled with wonderful surprises and happy adventures!</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Flip Card 4 -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <i class="fas fa-wand-magic-sparkles card-icon text-pink"></i>
-              <h3>Note #4</h3>
-              <p>Tap to reveal 🌟</p>
-            </div>
-            <div class="flip-card-back">
-              <i class="fas fa-crown card-icon text-gold"></i>
-              <h3>Truly One of a Kind!</h3>
-              <p>Thank you for being so amazing, kind, and wonderful. Have the best birthday ever, Prince Karlupia!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE ENVELOPE / LOVE LETTER SECTION -->
-    <section class="letter-section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-envelope-open-text"></i> Special Letter for Prince</h2>
-        <p class="section-desc">Tap the envelope to open a birthday message from the heart 💕</p>
-      </div>
-
-      <div class="envelope-wrapper">
-        <div class="envelope" id="envelope">
-          <div class="envelope-top"></div>
-          <div class="envelope-paper">
-            <div class="letter-content">
-              <h3>Dear Prince Karlupia, 🌟</h3>
-              <p>On your special day, I wanted to create something cute, memorable, and full of joy just for you!</p>
-              <p>Thank you for bringing so much warmth, laughter, and kindness to everyone around you. May your year ahead be blessed with happiness, good health, and success in everything you do.</p>
-              <p class="letter-sign">Happy Birthday Prince Karlupia! 🎉💖</p>
-            </div>
-          </div>
-          <div class="envelope-front"></div>
-          <div class="envelope-sticker"><i class="fas fa-heart"></i></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FUNNY SARCASTIC GAME SECTION: CHAI VS WIFE -->
-    <section class="game-section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-gamepad"></i> Prince's Loyalty Test 🤪</h2>
-        <p class="section-desc">Answer honestly Prince: What do you love more in life? ☕ vs 💍</p>
-      </div>
-
-      <div class="game-card">
-        <h3 class="game-question">Choose Your True Love:</h3>
-
-        <div class="game-options-container" id="game-options-container">
-          
-          <!-- Option A: Chai -->
-          <div class="game-option-box" id="chai-option-box">
-            <div class="option-img-wrapper">
-              <img src="chai.jpg" alt="Hot Masala Chai">
-            </div>
-            <button id="chai-btn" class="game-choice-btn chai-choice">
-              ☕ Hot Masala Chai
-            </button>
-          </div>
-
-          <!-- Option B: Wife -->
-          <div class="game-option-box" id="wife-option-box">
-            <div class="option-img-wrapper">
-              <img src="5.jpeg" alt="Wife">
-            </div>
-            <button id="wife-btn" class="game-choice-btn wife-choice">
-              💖 My Beloved Wife
-            </button>
-          </div>
-
-        </div>
-
-        <div class="game-hint">
-          <p><i class="fas fa-hand-pointer text-pink"></i> Tap on <strong>Wife</strong> or <strong>Chai</strong> to see your true score! 😉</p>
-        </div>
-
-        <!-- SARCASTIC PRANK RESULT TEXT BOX -->
-        <div id="game-result-box" class="game-result-card hidden">
-          <div class="prank-text-box">
-            <h3 class="prank-main-question">Why did you click Chai? Don't you love your wife more? ☕💔</h3>
-            <p class="prank-sub-message">Prince Karlupia, even though you tried to choose your wife, the universe registered CHAI! ☕ Your wife is watching you! 😂💖</p>
-          </div>
-          <button id="retry-game-btn" class="cute-btn mini-btn">Try Choosing Wife Again? 💍</button>
-        </div>
-    </section>
-
-    <!-- FOOTER CELEBRATION -->
-    <footer class="cute-footer">
-      <p>Made with <i class="fas fa-heart text-pink heart-beat"></i> for Prince Karlupia's Birthday!</p>
-      <button id="footer-celebrate-btn" class="cute-btn secondary-btn">
-        <i class="fas fa-paper-plane"></i> Send Love & Confetti to Prince! 🎊
-      </button>
-    </footer>
-
-  </main>
-
-  <!-- LIGHTBOX MODAL FOR PHOTO VIEWING -->
-  <div id="lightbox-modal" class="lightbox-modal hidden">
-    <div class="lightbox-backdrop"></div>
-    <div class="lightbox-container">
-      <button id="lightbox-close" class="lightbox-close-btn">&times;</button>
-      <div class="lightbox-content">
-        <div class="lightbox-img-box">
-          <img id="lightbox-img" src="" alt="Enlarged Memory">
-        </div>
-        <div class="lightbox-details">
-          <h3 id="lightbox-title">Photo Caption</h3>
-          <p id="lightbox-desc">Photo description goes here.</p>
-          <div class="lightbox-actions">
-            <button id="lightbox-like-btn" class="cute-btn mini-btn">
-              <i class="fas fa-heart"></i> <span id="like-count">1</span> Likes
-            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <script src="script.js"></script>
+
+  <!-- ============================================== -->
+  <!-- 12. ROYAL PUNJABI FOOTER                      -->
+  <!-- ============================================== -->
+  <footer class="py-16 bg-royal-maroon text-center text-white border-t-4 border-royal-gold">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-3xl text-royal-gold mb-2">☬</div>
+      <h3 class="font-script text-5xl sm:text-6xl shimmer-gold mb-2">Prince &amp; Preet</h3>
+      <p class="font-gurmukhi text-sm text-royal-goldLight mb-3">ਸਾਹਾ ਅਤੁਲੁ ਨ ਪੁਛੀਐ ਜਿਸੁ ਹੋਵੈ ਭਗਵਾਨੁ ॥</p>
+      <p class="text-xs uppercase tracking-[0.3em] text-amber-200/90 font-bold">#PrinceKiPreet &bull; Nov 1 &amp; 3, 2026</p>
+      <p class="text-xs text-amber-200/60 mt-6 font-serif italic">Crafted with Waheguru's blessings and endless love.</p>
+    </div>
+  </footer>
+
+
+
+
+  <!-- ============================================== -->
+  <!-- JAVASCRIPT LOGIC & MARIGOLD PETAL ANIMATIONS   -->
+  <!-- ============================================== -->
+  <script>
+    // Initialize AOS
+    AOS.init({
+      once: true,
+      duration: 1000,
+      easing: 'ease-out-cubic'
+    });
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // 1. Floating Marigold Petals & Gold Dust Canvas
+    const canvas = document.getElementById('petalsCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const petalColors = [
+      'rgba(230, 92, 0, 0.6)',   // Saffron Orange
+      'rgba(245, 171, 0, 0.65)',  // Marigold Yellow
+      'rgba(212, 175, 55, 0.55)', // Royal Gold
+      'rgba(178, 34, 34, 0.45)'   // Deep Crimson Red
+    ];
+
+    const particles = Array.from({ length: 35 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 6 + 3,
+      speedX: (Math.random() - 0.5) * 1.2,
+      speedY: Math.random() * 1.1 + 0.6,
+      rotation: Math.random() * 360,
+      rotSpeed: (Math.random() - 0.5) * 2,
+      color: petalColors[Math.floor(Math.random() * petalColors.length)]
+    }));
+
+    function animateMarigolds() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+        p.rotation += p.rotSpeed;
+
+        if (p.y > height) {
+          p.y = -10;
+          p.x = Math.random() * width;
+        }
+        if (p.x > width) p.x = 0;
+        if (p.x < 0) p.x = width;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.beginPath();
+        // Marigold petal / curved leaf shape
+        ctx.ellipse(0, 0, p.size, p.size * 1.6, 0.2, 0, 2 * Math.PI);
+        ctx.fillStyle = p.color;
+        ctx.shadowColor = '#D4AF37';
+        ctx.shadowBlur = 5;
+        ctx.fill();
+        ctx.restore();
+      });
+      requestAnimationFrame(animateMarigolds);
+    }
+    animateMarigolds();
+
+    // 2. Envelope Unboxing with Royal Gold & Saffron Confetti
+    function openEnvelope() {
+      const container = document.getElementById('envelopeContainer');
+      const modal = document.getElementById('envelopeModal');
+      
+      container.classList.add('envelope-open');
+
+      // Burst 1: Royal Punjabi Colors (Gold, Saffron, Crimson)
+      confetti({
+        particleCount: 120,
+        spread: 85,
+        origin: { y: 0.6 },
+        colors: ['#D4AF37', '#E65C00', '#7A1826', '#FFFFFF', '#F3E5AB']
+      });
+
+      // Burst 2: Side Cannons
+      setTimeout(() => {
+        confetti({
+          particleCount: 70,
+          angle: 60,
+          spread: 60,
+          origin: { x: 0, y: 0.7 },
+          colors: ['#D4AF37', '#E65C00', '#7A1826']
+        });
+        confetti({
+          particleCount: 70,
+          angle: 120,
+          spread: 60,
+          origin: { x: 1, y: 0.7 },
+          colors: ['#D4AF37', '#E65C00', '#7A1826']
+        });
+      }, 350);
+
+      // Smoothly hide modal
+      setTimeout(() => {
+        modal.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => {
+          modal.style.display = 'none';
+        }, 700);
+      }, 1500);
+    }
+
+
+
+    // 4. Live Countdown to Wedding Day (Nov 1, 2026, 9:30 AM)
+    const weddingDate = new Date('November 1, 2026 09:30:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = weddingDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = String(days).padStart(2, '0');
+        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 5. Add To Calendar (Nov 1 Anand Karaj to Nov 3 Reception)
+    function addToCalendar() {
+      const title = encodeURIComponent("Prince & Preet's Royal Punjabi Wedding & Reception");
+      const details = encodeURIComponent("Anand Karaj (Wedding): Sunday, Nov 1, 2026 at Rockland Resort, Dinanagar | Grand Reception: Tuesday, Nov 3, 2026 at Prince Resort, Kalanaur Road, Gurdaspur.");
+      const location = encodeURIComponent("Rockland Resort, Opp. KFC, Dinanagar / Prince Resort, Kalanaur Road, Gurdaspur");
+      const dates = "20261101T040000Z/20261103T183000Z";
+      
+      const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
+      window.open(gcalUrl, '_blank');
+    }
+
+    // 6. RSVP Submission & Shahi QR Pass
+    function handleRsvpSubmit(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('guestName').value;
+      const attendance = document.getElementById('attendance').value;
+      const count = document.getElementById('guestCount').value;
+      const diet = document.getElementById('dietary').value;
+      const wishes = document.getElementById('guestWishes').value;
+
+      document.getElementById('passGuestName').innerText = name;
+      document.getElementById('passDetails').innerText = `${count} • ${diet}`;
+
+      // Generate QR Code
+      const qrContainer = document.getElementById('qrcode');
+      qrContainer.innerHTML = '';
+      new QRCode(qrContainer, {
+        text: `SHAHI-PASS: Prince & Preet Vivah | Guest: ${name} | Count: ${count} | Status: ${attendance}`,
+        width: 140,
+        height: 140,
+        colorDark : "#4A0E17",
+        colorLight : "#FFFFFF",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+
+      // Show Card
+      const successCard = document.getElementById('rsvpSuccessCard');
+      successCard.classList.remove('hidden');
+      successCard.scrollIntoView({ behavior: 'smooth' });
+
+      // Add Wish to feed
+      if (wishes.trim()) {
+        const wishesContainer = document.getElementById('wishesContainer');
+        const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'PP';
+        
+        const newWish = document.createElement('div');
+        newWish.className = "royal-card p-6 rounded-3xl relative border-2 border-royal-gold shadow-xl";
+        newWish.innerHTML = `
+          <p class="font-serif italic text-gray-800 text-sm mb-4 leading-relaxed">"${wishes}"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-royal-maroon text-royal-gold font-bold flex items-center justify-center text-xs border border-royal-gold">${initials}</div>
+            <div>
+              <p class="text-xs font-bold text-royal-maroon">${name}</p>
+              <p class="text-[10px] text-gray-500">Just Now</p>
+            </div>
+          </div>
+        `;
+        wishesContainer.prepend(newWish);
+      }
+
+      // Saffron and Gold celebratory confetti
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.65 },
+        colors: ['#D4AF37', '#E65C00', '#7A1826', '#F3E5AB']
+      });
+
+      lucide.createIcons();
+    }
+
+    // ==============================================================
+    // 7. FIREBASE PHONE AUTH & LIVE SOCIAL PHOTO WALL LOGIC
+    // ==============================================================
+
+    // Your Firebase Configuration (Replace with your actual keys from Firebase Console)
+    const firebaseConfig = {
+      apiKey: "AIzaSyYOUR_ACTUAL_API_KEY_HERE",
+      authDomain: "prince-preet-wedding.firebaseapp.com",
+      projectId: "prince-preet-wedding",
+      storageBucket: "prince-preet-wedding.appspot.com",
+      messagingSenderId: "1234567890",
+      appId: "1:1234567890:web:abcdef123456"
+    };
+
+    let isFirebaseReady = false;
+    let auth = null;
+    let db = null;
+    let storage = null;
+    let confirmationResult = null;
+    let recaptchaVerifier = null;
+
+    try {
+      if (typeof firebase !== 'undefined' && firebaseConfig.apiKey !== "AIzaSyYOUR_ACTUAL_API_KEY_HERE") {
+        firebase.initializeApp(firebaseConfig);
+        auth = firebase.auth();
+        db = firebase.firestore();
+        storage = firebase.storage();
+        isFirebaseReady = true;
+        console.log("Firebase initialized successfully");
+      } else {
+        console.log("Running in Smart Sandbox / Demo Mode (Ready for your Firebase keys)");
+      }
+    } catch (err) {
+      console.warn("Firebase initialization deferred:", err);
+    }
+
+    // Local Storage Mock User Session
+    let currentUser = JSON.parse(localStorage.getItem('weddingGuestUser')) || null;
+
+    function updateAuthUI() {
+      const lockedBox = document.getElementById('feedAuthLocked');
+      const uploadBox = document.getElementById('feedUploadBox');
+      const navAuthText = document.getElementById('navAuthText');
+
+      if (currentUser) {
+        lockedBox.classList.add('hidden');
+        uploadBox.classList.remove('hidden');
+
+        document.getElementById('feedUserName').innerText = currentUser.name || "Guest";
+        document.getElementById('feedUserPhone').innerText = currentUser.phoneNumber || "+91";
+        const initials = (currentUser.name || 'G').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        document.getElementById('feedUserAvatar').innerText = initials;
+
+        if (navAuthText) navAuthText.innerText = currentUser.name.split(' ')[0];
+      } else {
+        lockedBox.classList.remove('hidden');
+        uploadBox.classList.add('hidden');
+        if (navAuthText) navAuthText.innerText = "Guest Login";
+      }
+      lucide.createIcons();
+    }
+
+    function handleAuthAction() {
+      if (currentUser) {
+        const confirmLogout = confirm(`Logged in as ${currentUser.name} (${currentUser.phoneNumber}). Do you want to log out?`);
+        if (confirmLogout) guestSignOut();
+      } else {
+        openLoginModal();
+      }
+    }
+
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.remove('hidden');
+      initRecaptcha();
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.add('hidden');
+    }
+
+    function initRecaptcha() {
+      if (isFirebaseReady && !recaptchaVerifier) {
+        try {
+          recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+            size: 'normal',
+            callback: () => { console.log("reCAPTCHA verified"); }
+          });
+          recaptchaVerifier.render();
+        } catch (e) {
+          console.log("reCAPTCHA setup:", e);
+        }
+      }
+    }
+
+    // Send OTP
+    function sendOtpCode() {
+      const name = document.getElementById('loginGuestName').value.trim();
+      const phone = document.getElementById('loginGuestPhone').value.trim();
+
+      if (!name) {
+        alert("Please enter your name.");
+        return;
+      }
+      if (!phone || phone.length < 10) {
+        alert("Please enter a valid mobile number with country code (e.g. +91 9876543210).");
+        return;
+      }
+
+      const sendBtn = document.getElementById('sendOtpBtn');
+      sendBtn.innerHTML = `<span class="animate-spin mr-2">⟳</span> Sending Code...`;
+      sendBtn.disabled = true;
+
+      if (isFirebaseReady) {
+        auth.signInWithPhoneNumber(phone, recaptchaVerifier)
+          .then((result) => {
+            confirmationResult = result;
+            switchToOtpStep(name, phone);
+          })
+          .catch((err) => {
+            alert("Error sending OTP: " + err.message);
+            sendBtn.innerHTML = `<span>Send Verification OTP</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
+            sendBtn.disabled = false;
+            lucide.createIcons();
+          });
+      } else {
+        // Smart sandbox mode simulation (works out of the box without setup!)
+        setTimeout(() => {
+          window._sandboxOtp = "123456";
+          alert(`[DEMO MODE]: Verification code sent! Your test OTP is: 123456\n(Once your Firebase keys are plugged in, this will send a real SMS)`);
+          switchToOtpStep(name, phone);
+        }, 800);
+      }
+    }
+
+    function switchToOtpStep(name, phone) {
+      document.getElementById('displaySentPhone').innerText = phone;
+      document.getElementById('phoneInputStep').classList.add('hidden');
+      document.getElementById('otpInputStep').classList.remove('hidden');
+      window._pendingUser = { name, phoneNumber: phone };
+      lucide.createIcons();
+    }
+
+    function backToPhoneStep() {
+      document.getElementById('phoneInputStep').classList.remove('hidden');
+      document.getElementById('otpInputStep').classList.add('hidden');
+      const sendBtn = document.getElementById('sendOtpBtn');
+      sendBtn.innerHTML = `<span>Send Verification OTP</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
+      sendBtn.disabled = false;
+      lucide.createIcons();
+    }
+
+    // Verify OTP
+    function verifyOtpCode() {
+      const code = document.getElementById('loginOtpCode').value.trim();
+      if (!code || code.length < 6) {
+        alert("Please enter the complete 6-digit OTP.");
+        return;
+      }
+
+      const verifyBtn = document.getElementById('verifyOtpBtn');
+      verifyBtn.innerHTML = `<span class="animate-spin mr-2">⟳</span> Verifying...`;
+      verifyBtn.disabled = true;
+
+      if (isFirebaseReady && confirmationResult) {
+        confirmationResult.confirm(code)
+          .then((res) => {
+            const user = res.user;
+            currentUser = {
+              uid: user.uid,
+              name: window._pendingUser.name,
+              phoneNumber: window._pendingUser.phoneNumber
+            };
+            finalizeLogin();
+          })
+          .catch((err) => {
+            alert("Invalid OTP code: " + err.message);
+            verifyBtn.innerHTML = `<span>Verify &amp; Enter Social Wall</span> <i data-lucide="check-circle" class="w-4 h-4"></i>`;
+            verifyBtn.disabled = false;
+            lucide.createIcons();
+          });
+      } else {
+        // Sandbox verification check
+        if (code === "123456" || code === window._sandboxOtp) {
+          currentUser = {
+            uid: "demo_" + Date.now(),
+            name: window._pendingUser.name,
+            phoneNumber: window._pendingUser.phoneNumber
+          };
+          finalizeLogin();
+        } else {
+          alert("Invalid OTP! For Demo Mode, please enter 123456.");
+          verifyBtn.innerHTML = `<span>Verify &amp; Enter Social Wall</span> <i data-lucide="check-circle" class="w-4 h-4"></i>`;
+          verifyBtn.disabled = false;
+          lucide.createIcons();
+        }
+      }
+    }
+
+    function finalizeLogin() {
+      localStorage.setItem('weddingGuestUser', JSON.stringify(currentUser));
+      closeLoginModal();
+      updateAuthUI();
+      
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#D4AF37', '#E65C00', '#7A1826']
+      });
+
+      alert(`Welcome, ${currentUser.name}! You are now authorized to post photos and likes.`);
+    }
+
+    function guestSignOut() {
+      if (isFirebaseReady) auth.signOut();
+      localStorage.removeItem('weddingGuestUser');
+      currentUser = null;
+      updateAuthUI();
+      alert("You have been signed out.");
+    }
+
+    // Image Upload & Preview Handling
+    let selectedImageBase64 = null;
+
+    function previewUploadImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Please choose an image under 5MB.");
+        e.target.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        selectedImageBase64 = evt.target.result;
+        document.getElementById('imagePreview').src = selectedImageBase64;
+        document.getElementById('imagePreviewContainer').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearImagePreview() {
+      selectedImageBase64 = null;
+      document.getElementById('photoFileInput').value = '';
+      document.getElementById('imagePreviewContainer').classList.add('hidden');
+    }
+
+    // Handle Photo Post
+    function handlePostPhoto(e) {
+      e.preventDefault();
+      if (!currentUser) {
+        openLoginModal();
+        return;
+      }
+
+      const caption = document.getElementById('photoCaption').value.trim();
+      const tag = document.getElementById('photoTag').value;
+
+      if (!selectedImageBase64) {
+        alert("Please select a photo to upload.");
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitPostBtn');
+      submitBtn.innerHTML = `<span class="animate-spin mr-2">⟳</span> Uploading to Wedding Wall...`;
+      submitBtn.disabled = true;
+
+      const newPost = {
+        id: "post_" + Date.now(),
+        authorName: currentUser.name,
+        authorPhone: currentUser.phoneNumber,
+        imageUrl: selectedImageBase64,
+        caption: caption,
+        category: tag,
+        likes: 1,
+        liked: true,
+        createdAt: "Just Now",
+        timestamp: Date.now()
+      };
+
+      // If live Firebase Firestore is active, save doc
+      if (isFirebaseReady && db) {
+        db.collection("wedding_photos").add(newPost)
+          .then(() => { finishPosting(newPost); })
+          .catch((err) => {
+            console.error("Firestore save error, falling back locally:", err);
+            finishPosting(newPost);
+          });
+      } else {
+        finishPosting(newPost);
+      }
+    }
+
+    function finishPosting(post) {
+      // Save locally so it stays visible immediately
+      const savedPosts = JSON.parse(localStorage.getItem('weddingGuestPosts')) || [];
+      savedPosts.unshift(post);
+      localStorage.setItem('weddingGuestPosts', JSON.stringify(savedPosts));
+
+      // Reset form
+      document.getElementById('postPhotoForm').reset();
+      clearImagePreview();
+
+      const submitBtn = document.getElementById('submitPostBtn');
+      submitBtn.innerHTML = `<i data-lucide="upload-cloud" class="w-4 h-4"></i> Post to Wedding Wall`;
+      submitBtn.disabled = false;
+
+      // Render updated feed
+      renderSocialFeed();
+
+      confetti({
+        particleCount: 120,
+        spread: 90,
+        origin: { y: 0.65 },
+        colors: ['#D4AF37', '#9B1B48', '#1C3D2F']
+      });
+
+      // Scroll to post
+      const feedGrid = document.getElementById('socialFeedGrid');
+      feedGrid.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Default Seed Posts (High quality wedding vibes)
+    const initialPosts = [
+      {
+        id: "p1",
+        authorName: "Simran Kaur",
+        authorPhone: "+91 98111 22233",
+        imageUrl: "images/couple_portrait.jpg",
+        caption: "The most beautiful couple! Prince and Preet look like royalty ☬",
+        category: "Anand Karaj (Wedding)",
+        likes: 24,
+        liked: false,
+        createdAt: "2 hours ago"
+      },
+      {
+        id: "p2",
+        authorName: "Aman Dhillon",
+        authorPhone: "+1 604 555 0192",
+        imageUrl: "images/couple_landscape.jpg",
+        caption: "Courtyards illuminated under starlight! Ready for the Jaggo &amp; DJ night! 🔥🪔",
+        category: "Sangeet & Jaggo",
+        likes: 38,
+        liked: true,
+        createdAt: "5 hours ago"
+      },
+      {
+        id: "p3",
+        authorName: "Harpreet Bains",
+        authorPhone: "+91 98722 33445",
+        imageUrl: "images/couple_moment.jpg",
+        caption: "Auspicious vibes, traditional celebrations, and the happiest families! Congratulations! 🌸",
+        category: "Mehendi & Haldi",
+        likes: 19,
+        liked: false,
+        createdAt: "Yesterday"
+      }
+    ];
+
+    let currentFilter = 'all';
+
+    function filterPhotos(category) {
+      currentFilter = category;
+      document.querySelectorAll('.feed-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.classList.add('bg-royal-maroon', 'text-royal-gold', 'border-royal-gold');
+          btn.classList.remove('bg-white', 'text-royal-maroon');
+        } else {
+          btn.classList.remove('bg-royal-maroon', 'text-royal-gold', 'border-royal-gold');
+          btn.classList.add('bg-white', 'text-royal-maroon');
+        }
+      });
+      renderSocialFeed();
+    }
+
+    function toggleLike(postId) {
+      if (!currentUser) {
+        alert("Please login with your mobile number to like photos!");
+        openLoginModal();
+        return;
+      }
+
+      const savedPosts = JSON.parse(localStorage.getItem('weddingGuestPosts')) || [];
+      const allPosts = [...savedPosts, ...initialPosts];
+      const target = allPosts.find(p => p.id === postId);
+
+      if (target) {
+        target.liked = !target.liked;
+        target.likes = target.liked ? target.likes + 1 : Math.max(0, target.likes - 1);
+        
+        // Save in user local storage
+        localStorage.setItem('weddingGuestPosts', JSON.stringify(savedPosts));
+        renderSocialFeed();
+      }
+    }
+
+    function renderSocialFeed() {
+      const feedGrid = document.getElementById('socialFeedGrid');
+      const userPosts = JSON.parse(localStorage.getItem('weddingGuestPosts')) || [];
+      const combined = [...userPosts, ...initialPosts];
+
+      const filtered = currentFilter === 'all' 
+        ? combined 
+        : combined.filter(p => p.category === currentFilter);
+
+      feedGrid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        feedGrid.innerHTML = `
+          <div class="col-span-3 text-center py-12 text-gray-500 font-serif">
+            <i data-lucide="image" class="w-12 h-12 mx-auto text-royal-gold mb-2"></i>
+            <p class="text-base">No photos uploaded under "${currentFilter}" yet. Be the first to share one!</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      filtered.forEach(post => {
+        const initials = post.authorName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'WD';
+        const card = document.createElement('div');
+        card.className = "royal-card rounded-3xl overflow-hidden shadow-lg border-2 border-royal-gold/40 flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <!-- Post Header -->
+            <div class="p-4 flex items-center justify-between bg-white/70 border-b border-royal-gold/20">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-royal-maroon text-royal-gold font-bold flex items-center justify-center text-xs border border-royal-gold">${initials}</div>
+                <div>
+                  <h4 class="text-xs font-bold text-royal-maroon">${post.authorName}</h4>
+                  <p class="text-[10px] text-gray-400 font-medium">${post.createdAt}</p>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-royal-warmSand text-royal-goldDark border border-royal-gold/30">${post.category}</span>
+            </div>
+
+            <!-- Post Image with hover effect -->
+            <div class="aspect-[4/3] sm:aspect-square w-full bg-black/5 overflow-hidden">
+              <img src="${post.imageUrl}" alt="${post.caption}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            </div>
+
+            <!-- Post Caption -->
+            <div class="p-4">
+              <p class="text-xs text-gray-700 font-serif leading-relaxed">"${post.caption}"</p>
+            </div>
+          </div>
+
+          <!-- Post Footer / Likes -->
+          <div class="px-4 py-3 bg-white/50 border-t border-royal-gold/20 flex items-center justify-between">
+            <button onclick="toggleLike('${post.id}')" class="flex items-center gap-1.5 text-xs font-bold ${post.liked ? 'text-rose-600' : 'text-gray-500 hover:text-rose-500'} transition-colors">
+              <i data-lucide="heart" class="w-4 h-4 ${post.liked ? 'fill-rose-600' : ''}"></i>
+              <span>${post.likes} Likes</span>
+            </button>
+            <span class="text-[10px] text-gray-400 flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Verified Guest</span>
+          </div>
+        `;
+        feedGrid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // Initialize UI on page load
+    updateAuthUI();
+    renderSocialFeed();
+  </script>
 </body>
 </html>
-
