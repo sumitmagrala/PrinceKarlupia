@@ -20,10 +20,6 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-  <!-- Firebase SDKs (v10 compat mode for reliable vanilla JS execution) -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 
   <script>
     tailwind.config = {
@@ -268,33 +264,25 @@
       <nav class="hidden md:flex items-center space-x-6 text-xs uppercase tracking-widest font-bold text-royal-maroon">
         <a href="#rituals" class="hover:text-royal-gold transition-colors">Traditions</a>
         <a href="#events" class="hover:text-royal-gold transition-colors">Events</a>
-        <a href="#live-feed" class="text-royal-ruby hover:text-royal-gold transition-colors flex items-center gap-1 font-extrabold"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Live Photos</a>
         <a href="#venue" class="hover:text-royal-gold transition-colors">Venue</a>
         <a href="#gallery" class="hover:text-royal-gold transition-colors">Moments</a>
-        <a href="#rsvp" class="hover:text-royal-gold transition-colors">RSVP</a>
       </nav>
 
       <div class="flex items-center space-x-1.5 sm:space-x-3">
         <!-- Background Music Control Button -->
-        <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" aria-label="Toggle background music" class="px-2.5 sm:px-3.5 py-1.5 rounded-full border border-royal-gold text-royal-maroon hover:bg-royal-maroon hover:text-royal-gold transition-all bg-white/95 text-[11px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm active:scale-95">
+        <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" aria-label="Toggle background music" class="px-3 sm:px-4 py-1.5 rounded-full border border-royal-gold text-royal-maroon hover:bg-royal-maroon hover:text-royal-gold transition-all bg-white/95 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm active:scale-95">
           <i data-lucide="volume-2" id="musicIcon" class="w-3.5 h-3.5 text-royal-gold"></i>
-          <span id="musicText" class="hidden sm:inline">Play Music</span>
+          <span id="musicText">Play Music</span>
         </button>
-
-        <a href="#rsvp" class="px-3 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold rounded-full bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold border border-royal-gold/60 shadow-md transition-all active:scale-95">
-          RSVP
-        </a>
       </div>
     </div>
 
     <!-- Mobile Scrollable Section Pill Menu (Fast thumb navigation) -->
-    <div class="flex md:hidden overflow-x-auto no-scrollbar px-3 py-1.5 border-t border-royal-gold/20 bg-[#FAF3E0]/70 gap-2 text-[10px] uppercase font-bold tracking-wider text-royal-maroon whitespace-nowrap">
-      <a href="#rituals" class="px-2.5 py-1 rounded-full bg-white/80 border border-royal-gold/30 hover:bg-royal-maroon hover:text-royal-gold transition-colors">Traditions</a>
-      <a href="#events" class="px-2.5 py-1 rounded-full bg-white/80 border border-royal-gold/30 hover:bg-royal-maroon hover:text-royal-gold transition-colors">Events</a>
-      <a href="#live-feed" class="px-2.5 py-1 rounded-full bg-white/80 border border-royal-gold/30 text-royal-ruby flex items-center gap-1 font-extrabold hover:bg-royal-maroon hover:text-royal-gold transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Live Wall</a>
-      <a href="#venue" class="px-2.5 py-1 rounded-full bg-white/80 border border-royal-gold/30 hover:bg-royal-maroon hover:text-royal-gold transition-colors">Venue</a>
-      <a href="#gallery" class="px-2.5 py-1 rounded-full bg-white/80 border border-royal-gold/30 hover:bg-royal-maroon hover:text-royal-gold transition-colors">Photos</a>
-      <a href="#rsvp" class="px-2.5 py-1 rounded-full bg-royal-maroon text-royal-gold border border-royal-gold">RSVP</a>
+    <div class="flex md:hidden overflow-x-auto no-scrollbar px-3 py-1.5 border-t border-royal-gold/20 bg-[#FAF3E0]/70 gap-2 text-[10px] uppercase font-bold tracking-wider text-royal-maroon whitespace-nowrap justify-center">
+      <a href="#rituals" class="px-3 py-1 rounded-full bg-white/80 border border-royal-gold/30 hover:bg-royal-maroon hover:text-royal-gold transition-colors">Traditions</a>
+      <a href="#events" class="px-3 py-1 rounded-full bg-white/80 border border-royal-gold/30 hover:bg-royal-maroon hover:text-royal-gold transition-colors">Events</a>
+      <a href="#venue" class="px-3 py-1 rounded-full bg-white/80 border border-royal-gold/30 hover:bg-royal-maroon hover:text-royal-gold transition-colors">Venue</a>
+      <a href="#gallery" class="px-3 py-1 rounded-full bg-white/80 border border-royal-gold/30 hover:bg-royal-maroon hover:text-royal-gold transition-colors">Moments</a>
     </div>
   </header>
 
@@ -356,8 +344,8 @@
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 max-w-md sm:max-w-none mx-auto" data-aos="zoom-in" data-aos-delay="400">
-        <a href="#rsvp" class="w-full sm:w-auto text-center px-6 sm:px-8 py-3.5 sm:py-4 bg-royal-maroon hover:bg-royal-ruby text-royal-gold text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-bold rounded-full shadow-xl border border-royal-gold/60 transition-all duration-300 transform active:scale-95">
-          R.S.V.P
+        <a href="#events" class="w-full sm:w-auto text-center px-6 sm:px-8 py-3.5 sm:py-4 bg-royal-maroon hover:bg-royal-ruby text-royal-gold text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-bold rounded-full shadow-xl border border-royal-gold/60 transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2">
+          <i data-lucide="sparkles" class="w-4 h-4 text-royal-gold"></i> View Wedding Itinerary
         </a>
         <button onclick="addToCalendar()" class="w-full sm:w-auto justify-center px-6 sm:px-7 py-3.5 sm:py-4 border-2 border-royal-gold bg-white hover:bg-royal-gold hover:text-royal-maroon text-royal-maroon text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-bold rounded-full transition-all duration-300 transform active:scale-95 flex items-center gap-2 shadow-md">
           <i data-lucide="calendar-plus" class="w-4 h-4 text-royal-gold"></i> Add To Calendar
@@ -715,162 +703,6 @@
   </section>
 
 
-  <!-- ============================================== -->
-  <!-- 9.5 LIVE WEDDING SOCIAL PHOTO FEED (FIREBASE)  -->
-  <!-- ============================================== -->
-  <section id="live-feed" class="py-24 bg-gradient-to-b from-royal-warmSand/60 to-royal-cream border-t-4 border-royal-gold/40 relative">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
-        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-royal-ruby text-white text-[11px] uppercase font-bold tracking-widest mb-3 shadow-md">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Guest Social Wall
-        </div>
-        <h2 class="font-cinzel text-4xl sm:text-5xl text-royal-maroon font-bold">Snap, Share &amp; Celebrate</h2>
-        <p class="font-serif italic text-gray-700 text-base mt-2">Captured an unforgettable moment from the Jaggo, Anand Karaj, or Reception? Share it with Prince &amp; Preet!</p>
-        <div class="w-20 h-1 bg-royal-gold mx-auto mt-4 rounded-full"></div>
-      </div>
-
-      <!-- Upload Bar Card (Dynamic according to Auth Status) -->
-      <div class="royal-card p-6 sm:p-8 rounded-3xl max-w-3xl mx-auto mb-16 border-2 border-royal-gold shadow-xl" data-aos="zoom-in">
-        
-        <div class="border-b border-royal-gold/30 pb-4 mb-5 text-center sm:text-left">
-          <h3 class="font-cinzel text-xl sm:text-2xl text-royal-maroon font-bold">Upload a Wedding Moment</h3>
-          <p class="text-xs text-gray-600 font-serif mt-1">Share your photos from the celebration directly to the live gallery</p>
-        </div>
-
-        <form id="postPhotoForm" onsubmit="handlePostPhoto(event)" class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1.5">Your Name *</label>
-              <input type="text" id="photoAuthorName" required placeholder="e.g. Jasleen Kaur" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none text-sm bg-white">
-            </div>
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1.5">Select Event Category</label>
-              <select id="photoTag" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none text-sm bg-white font-medium text-gray-700">
-                <option value="Mehendi & Haldi">🌸 Mehendi &amp; Haldi</option>
-                <option value="Sangeet & Jaggo">🪔 Sangeet &amp; Shahi Jaggo</option>
-                <option value="Anand Karaj (Wedding)">☬ Anand Karaj (Wedding)</option>
-                <option value="Grand Reception">✨ Grand Reception Gala</option>
-                <option value="Candid & Family Moments">📸 Candid &amp; Family Moments</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1.5">Caption or Love Note *</label>
-            <input type="text" id="photoCaption" required placeholder="e.g. Sangeet beats on fire! Prince & Preet looking stunning! 🔥" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/20 outline-none text-sm bg-white">
-          </div>
-
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-royal-maroon font-bold mb-1.5">Choose Photo *</label>
-            <input type="file" id="photoFileInput" accept="image/*" required onchange="previewUploadImage(event)" class="w-full text-xs text-gray-500 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-royal-maroon file:text-royal-gold hover:file:bg-royal-ruby cursor-pointer border border-gray-300 rounded-xl p-1 bg-white">
-          </div>
-
-          <!-- Image preview box -->
-          <div id="imagePreviewContainer" class="hidden relative rounded-2xl overflow-hidden max-h-56 border-2 border-royal-gold/40 shadow-inner">
-            <img id="imagePreview" src="" alt="Upload Preview" class="w-full h-full object-cover">
-            <button type="button" onclick="clearImagePreview()" class="absolute top-2 right-2 p-1.5 rounded-full bg-black/70 text-white hover:bg-black">
-              <i data-lucide="x" class="w-4 h-4"></i>
-            </button>
-          </div>
-
-          <button type="submit" id="submitPostBtn" class="w-full py-3.5 bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-lg border border-royal-gold/60 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95">
-            <i data-lucide="upload-cloud" class="w-4 h-4"></i> Post to Wedding Wall
-          </button>
-        </form>
-      </div>
-
-      <!-- Filter Categories -->
-      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
-        <button onclick="filterPhotos('all')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-royal-maroon text-royal-gold border border-royal-gold active-filter" data-filter="all">All Photos</button>
-        <button onclick="filterPhotos('Mehendi & Haldi')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-white text-royal-maroon border border-royal-gold/40 hover:border-royal-gold" data-filter="Mehendi & Haldi">🌸 Mehendi</button>
-        <button onclick="filterPhotos('Sangeet & Jaggo')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-white text-royal-maroon border border-royal-gold/40 hover:border-royal-gold" data-filter="Sangeet & Jaggo">🪔 Jaggo / Sangeet</button>
-        <button onclick="filterPhotos('Anand Karaj (Wedding)')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-white text-royal-maroon border border-royal-gold/40 hover:border-royal-gold" data-filter="Anand Karaj (Wedding)">☬ Anand Karaj</button>
-        <button onclick="filterPhotos('Grand Reception')" class="feed-filter-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-white text-royal-maroon border border-royal-gold/40 hover:border-royal-gold" data-filter="Grand Reception">✨ Reception</button>
-      </div>
-
-      <!-- Live Photo Social Grid -->
-      <div id="socialFeedGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <!-- Rendered dynamically via JavaScript & Firebase -->
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================== -->
-  <!-- 10. WEDDING RSVP                               -->
-  <!-- ============================================== -->
-  <section id="rsvp" class="py-16 sm:py-24 max-w-4xl mx-auto px-3.5 sm:px-6">
-    <div class="royal-card rounded-2xl sm:rounded-3xl p-5 sm:p-14 border-2 sm:border-4 border-royal-gold shadow-2xl relative overflow-hidden" data-aos="fade-up">
-      
-      <div class="relative z-10">
-        <div class="text-center max-w-lg mx-auto mb-8 sm:mb-10">
-          <span class="font-gurmukhi text-royal-goldDark text-sm sm:text-base font-bold">ਸਵਾਗਤਮ &bull; Shahi Nimantran</span>
-          <h2 class="font-cinzel text-3xl sm:text-5xl text-royal-maroon mt-1 font-bold">RSVP</h2>
-          <p class="text-gray-600 font-serif italic text-sm sm:text-base mt-2">Kindly confirm your presence by October 15, 2026</p>
-        </div>
-
-        <!-- RSVP Form -->
-        <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)" class="space-y-4 sm:space-y-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-1.5 font-bold">Your Full Name *</label>
-              <input type="text" id="guestName" required placeholder="Guest / Family Name" class="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white min-h-[46px]">
-            </div>
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-1.5 font-bold">Email Address *</label>
-              <input type="email" id="guestEmail" required placeholder="guest@example.com" class="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white min-h-[46px]">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-1.5 font-bold">Will your family join us? *</label>
-              <select id="attendance" required class="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white min-h-[46px]">
-                <option value="Joyfully Attending">Joyfully Attending (ਹਾਂਜੀ, ਜਰੂਰ ਆਵਾਂਗੇ)</option>
-                <option value="Regretfully Declining">Regretfully Declining</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-1.5 font-bold">Number of Guests</label>
-              <select id="guestCount" class="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white min-h-[46px]">
-                <option value="1 Guest">1 (Attending solo)</option>
-                <option value="2 Guests">2 (With Plus One / Spouse)</option>
-                <option value="Family (3-4)">Family (3-4 Members)</option>
-                <option value="Large Family (5+)">Large Family (5+ Members)</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-royal-maroon mb-1.5 font-bold">Langar &amp; Banquet Dietary</label>
-            <select id="dietary" class="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-300 focus:border-royal-gold focus:ring-2 focus:ring-royal-gold/30 outline-none transition-all text-sm bg-white min-h-[46px]">
-              <option value="Shahi Vegetarian Gourmet">Shahi Vegetarian Gourmet</option>
-              <option value="Jain Friendly">Jain Friendly</option>
-              <option value="Non-Vegetarian Punjabi">Non-Vegetarian Punjabi Delicacies</option>
-              <option value="Vegan / Nut-Free">Vegan / Nut-Free</option>
-            </select>
-          </div>
-
-          <button type="submit" class="w-full py-4 bg-gradient-to-r from-royal-maroon to-royal-ruby hover:from-royal-ruby hover:to-royal-maroon text-royal-gold text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-bold rounded-xl sm:rounded-2xl shadow-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 border-2 border-royal-gold cursor-pointer min-h-[48px]">
-            <i data-lucide="send" class="w-4 h-4 text-royal-gold"></i> Submit RSVP
-          </button>
-        </form>
-
-        <!-- Dynamic Success Confirmation -->
-        <div id="rsvpSuccessCard" class="hidden mt-10 p-8 sm:p-10 bg-gradient-to-b from-[#FFFDF9] to-[#FAF3E0] rounded-3xl border-4 border-royal-gold shadow-2xl text-center">
-          <div class="w-16 h-16 bg-royal-maroon text-royal-gold rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-royal-gold animate-bounce">
-            <span class="text-2xl">☬</span>
-          </div>
-          <h3 class="font-cinzel text-3xl sm:text-4xl text-royal-maroon font-bold">Lakh Lakh Vadhaiyan!</h3>
-          <p class="text-base text-gray-700 font-serif italic mt-2">Thank you, <span id="confirmedGuestName" class="font-bold text-royal-maroon">Guest</span>! Your RSVP has been confirmed. We look forward to welcoming you with dhol beats and warm celebrations!</p>
-          <div class="mt-4 inline-block px-5 py-2 rounded-full bg-white border border-royal-gold/50 text-royal-maroon text-xs font-semibold shadow-sm" id="confirmedGuestDetails">
-            Attending &bull; Shahi Vegetarian Gourmet
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
 
   <!-- ============================================== -->
@@ -1099,261 +931,6 @@
       const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
       window.open(gcalUrl, '_blank');
     }
-
-    // 6. Wedding RSVP Submission
-    function handleRsvpSubmit(e) {
-      e.preventDefault();
-      
-      const name = document.getElementById('guestName').value;
-      const attendance = document.getElementById('attendance').value;
-      const count = document.getElementById('guestCount').value;
-      const diet = document.getElementById('dietary').value;
-
-      document.getElementById('confirmedGuestName').innerText = name;
-      document.getElementById('confirmedGuestDetails').innerText = `${attendance} • ${count} • ${diet}`;
-
-      // Show Card
-      const successCard = document.getElementById('rsvpSuccessCard');
-      successCard.classList.remove('hidden');
-      successCard.scrollIntoView({ behavior: 'smooth' });
-
-      // Saffron and Gold celebratory confetti
-      confetti({
-        particleCount: 150,
-        spread: 100,
-        origin: { y: 0.65 },
-        colors: ['#D4AF37', '#E65C00', '#7A1826', '#F3E5AB']
-      });
-
-      lucide.createIcons();
-    }
-
-    // ==============================================================
-    // 7. LIVE SOCIAL PHOTO WALL LOGIC
-    // ==============================================================
-
-    // Image Upload & Preview Handling
-    let selectedImageBase64 = null;
-
-    function previewUploadImage(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Please choose an image under 5MB.");
-        e.target.value = '';
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        selectedImageBase64 = evt.target.result;
-        document.getElementById('imagePreview').src = selectedImageBase64;
-        document.getElementById('imagePreviewContainer').classList.remove('hidden');
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function clearImagePreview() {
-      selectedImageBase64 = null;
-      document.getElementById('photoFileInput').value = '';
-      document.getElementById('imagePreviewContainer').classList.add('hidden');
-    }
-
-    // Handle Photo Post (Direct upload without login)
-    function handlePostPhoto(e) {
-      e.preventDefault();
-
-      const authorName = document.getElementById('photoAuthorName').value.trim() || "Guest";
-      const caption = document.getElementById('photoCaption').value.trim();
-      const tag = document.getElementById('photoTag').value;
-
-      if (!selectedImageBase64) {
-        alert("Please select a photo to upload.");
-        return;
-      }
-
-      const submitBtn = document.getElementById('submitPostBtn');
-      submitBtn.innerHTML = `<span class="animate-spin mr-2">⟳</span> Uploading to Wedding Wall...`;
-      submitBtn.disabled = true;
-
-      const newPost = {
-        id: "post_" + Date.now(),
-        authorName: authorName,
-        imageUrl: selectedImageBase64,
-        caption: caption,
-        category: tag,
-        likes: 1,
-        liked: true,
-        createdAt: "Just Now",
-        timestamp: Date.now()
-      };
-
-      finishPosting(newPost);
-    }
-
-    function finishPosting(post) {
-      // Save locally so it stays visible immediately
-      const savedPosts = JSON.parse(localStorage.getItem('weddingGuestPosts')) || [];
-      savedPosts.unshift(post);
-      localStorage.setItem('weddingGuestPosts', JSON.stringify(savedPosts));
-
-      // Reset form
-      document.getElementById('postPhotoForm').reset();
-      clearImagePreview();
-
-      const submitBtn = document.getElementById('submitPostBtn');
-      submitBtn.innerHTML = `<i data-lucide="upload-cloud" class="w-4 h-4"></i> Post to Wedding Wall`;
-      submitBtn.disabled = false;
-
-      // Render updated feed
-      renderSocialFeed();
-
-      confetti({
-        particleCount: 120,
-        spread: 90,
-        origin: { y: 0.65 },
-        colors: ['#D4AF37', '#9B1B48', '#1C3D2F']
-      });
-
-      // Scroll to post
-      const feedGrid = document.getElementById('socialFeedGrid');
-      feedGrid.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Default Seed Posts (High quality wedding vibes)
-    const initialPosts = [
-      {
-        id: "p1",
-        authorName: "Simran Kaur",
-        imageUrl: "images/couple_portrait.jpg",
-        caption: "The most beautiful couple! Prince and Preet look like royalty ☬",
-        category: "Anand Karaj (Wedding)",
-        likes: 24,
-        liked: false,
-        createdAt: "2 hours ago"
-      },
-      {
-        id: "p2",
-        authorName: "Aman Dhillon",
-        imageUrl: "images/couple_landscape.jpg",
-        caption: "Courtyards illuminated under starlight! Ready for the Jaggo & DJ night! 🔥🪔",
-        category: "Sangeet & Jaggo",
-        likes: 38,
-        liked: true,
-        createdAt: "5 hours ago"
-      },
-      {
-        id: "p3",
-        authorName: "Harpreet Bains",
-        imageUrl: "images/ads.jpg",
-        caption: "Auspicious vibes, traditional celebrations, and the happiest families! Congratulations! 🌸",
-        category: "Mehendi & Haldi",
-        likes: 19,
-        liked: false,
-        createdAt: "Yesterday"
-      }
-    ];
-
-    let currentFilter = 'all';
-
-    function filterPhotos(category) {
-      currentFilter = category;
-      document.querySelectorAll('.feed-filter-btn').forEach(btn => {
-        if (btn.getAttribute('data-filter') === category) {
-          btn.classList.add('bg-royal-maroon', 'text-royal-gold', 'border-royal-gold');
-          btn.classList.remove('bg-white', 'text-royal-maroon');
-        } else {
-          btn.classList.remove('bg-royal-maroon', 'text-royal-gold', 'border-royal-gold');
-          btn.classList.add('bg-white', 'text-royal-maroon');
-        }
-      });
-      renderSocialFeed();
-    }
-
-    function toggleLike(postId) {
-      const savedPosts = JSON.parse(localStorage.getItem('weddingGuestPosts')) || [];
-      const allPosts = [...savedPosts, ...initialPosts];
-      const target = allPosts.find(p => p.id === postId);
-
-      if (target) {
-        target.liked = !target.liked;
-        target.likes = target.liked ? target.likes + 1 : Math.max(0, target.likes - 1);
-        
-        // Save in user local storage
-        localStorage.setItem('weddingGuestPosts', JSON.stringify(savedPosts));
-        renderSocialFeed();
-      }
-    }
-
-    function renderSocialFeed() {
-      const feedGrid = document.getElementById('socialFeedGrid');
-      const userPosts = JSON.parse(localStorage.getItem('weddingGuestPosts')) || [];
-      const combined = [...userPosts, ...initialPosts];
-
-      const filtered = currentFilter === 'all' 
-        ? combined 
-        : combined.filter(p => p.category === currentFilter);
-
-      feedGrid.innerHTML = '';
-
-      if (filtered.length === 0) {
-        feedGrid.innerHTML = `
-          <div class="col-span-3 text-center py-12 text-gray-500 font-serif">
-            <i data-lucide="image" class="w-12 h-12 mx-auto text-royal-gold mb-2"></i>
-            <p class="text-base">No photos uploaded under "${currentFilter}" yet. Be the first to share one!</p>
-          </div>
-        `;
-        lucide.createIcons();
-        return;
-      }
-
-      filtered.forEach(post => {
-        const initials = post.authorName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'WD';
-        const card = document.createElement('div');
-        card.className = "royal-card rounded-3xl overflow-hidden shadow-lg border-2 border-royal-gold/40 flex flex-col justify-between";
-        card.innerHTML = `
-          <div>
-            <!-- Post Header -->
-            <div class="p-4 flex items-center justify-between bg-white/70 border-b border-royal-gold/20">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-full bg-royal-maroon text-royal-gold font-bold flex items-center justify-center text-xs border border-royal-gold">${initials}</div>
-                <div>
-                  <h4 class="text-xs font-bold text-royal-maroon">${post.authorName}</h4>
-                  <p class="text-[10px] text-gray-400 font-medium">${post.createdAt}</p>
-                </div>
-              </div>
-              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-royal-warmSand text-royal-goldDark border border-royal-gold/30">${post.category}</span>
-            </div>
-
-            <!-- Post Image with hover effect -->
-            <div class="aspect-[4/3] sm:aspect-square w-full bg-black/5 overflow-hidden">
-              <img src="${post.imageUrl}" alt="${post.caption}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-            </div>
-
-            <!-- Post Caption -->
-            <div class="p-4">
-              <p class="text-xs text-gray-700 font-serif leading-relaxed">"${post.caption}"</p>
-            </div>
-          </div>
-
-          <!-- Post Footer / Likes -->
-          <div class="px-4 py-3 bg-white/50 border-t border-royal-gold/20 flex items-center justify-between">
-            <button onclick="toggleLike('${post.id}')" class="flex items-center gap-1.5 text-xs font-bold ${post.liked ? 'text-rose-600' : 'text-gray-500 hover:text-rose-500'} transition-colors">
-              <i data-lucide="heart" class="w-4 h-4 ${post.liked ? 'fill-rose-600' : ''}"></i>
-              <span>${post.likes} Likes</span>
-            </button>
-            <span class="text-[10px] text-gray-400 flex items-center gap-1"><i data-lucide="heart-handshake" class="w-3 h-3 text-royal-gold"></i> Guest Moment</span>
-          </div>
-        `;
-        feedGrid.appendChild(card);
-      });
-
-      lucide.createIcons();
-    }
-
-    // Initialize UI on page load
-    renderSocialFeed();
   </script>
 </body>
 </html>
